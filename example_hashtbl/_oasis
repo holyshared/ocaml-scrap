@@ -1,5 +1,5 @@
 OASISFormat: 0.4
-Name:        hashtbl_example
+Name:        example_hashtbl
 Version:     0.1.0
 Synopsis:    Hashtbl examples
 Authors:     Noritka Horio <holy.shared.design@gmail.com>
@@ -7,9 +7,9 @@ License:     MIT
 Plugins:     META (0.4), DevFiles (0.4)
 BuildTools:  ocamlbuild
 
-Executable hashtbl_example
+Executable example_hashtbl
   Path:       src
-  MainIs:     hashtbl_example.ml
+  MainIs:     example_hashtbl.ml
   CompiledObject: native
   BuildDepends:
-    core, threads
+    core, core_kernel, threads

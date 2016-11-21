@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: 67b1551e5bb7bbdf5db36756a00585d7)
+# DO NOT EDIT (digest: 0a019498a2daeef5cf358483d6538244)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -14,9 +14,11 @@ true: annot, bin_annot
 ".git": not_hygienic
 "_darcs": -traverse
 "_darcs": not_hygienic
-# Executable hashtbl_example
-"src/hashtbl_example.native": pkg_core
-"src/hashtbl_example.native": pkg_threads
+# Executable example_hashtbl
+"src/example_hashtbl.native": pkg_core
+"src/example_hashtbl.native": pkg_core_kernel
+"src/example_hashtbl.native": pkg_threads
 <src/*.ml{,i,y}>: pkg_core
+<src/*.ml{,i,y}>: pkg_core_kernel
 <src/*.ml{,i,y}>: pkg_threads
 # OASIS_STOP
