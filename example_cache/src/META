@@ -1,0 +1,12 @@
+# OASIS_START
+# DO NOT EDIT (digest: 5a5295378948fcd3bd0ecb47b802de65)
+version = "0.1.0"
+description = "File contents cache examples"
+requires = "str"
+archive(byte) = "example_cache.cma"
+archive(byte, plugin) = "example_cache.cma"
+archive(native) = "example_cache.cmxa"
+archive(native, plugin) = "example_cache.cmxs"
+exists_if = "example_cache.cma"
+# OASIS_STOP
+
