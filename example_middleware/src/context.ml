@@ -1,0 +1,3 @@
+type context = {
+  name: string
+}
