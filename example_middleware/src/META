@@ -1,0 +1,11 @@
+# OASIS_START
+# DO NOT EDIT (digest: dda4549cb5474e06f514738a928220bd)
+version = "0.1.0"
+description = "middleware chain"
+archive(byte) = "example_middleware.cma"
+archive(byte, plugin) = "example_middleware.cma"
+archive(native) = "example_middleware.cmxa"
+archive(native, plugin) = "example_middleware.cmxs"
+exists_if = "example_middleware.cma"
+# OASIS_STOP
+

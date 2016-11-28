@@ -1,0 +1,32 @@
+OASISFormat: 0.4
+Name:        example_middleware
+Version:     0.1.0
+Synopsis:    middleware chain
+Authors:     Noritka Horio <holy.shared.design@gmail.com>
+License:     MIT
+Plugins:     META (0.4), DevFiles (0.4)
+BuildTools:  ocamlbuild
+
+Executable example_middleware
+  Path: src
+  MainIs: example_middleware.ml
+  CompiledObject: native
+
+Library example_middleware
+  Path: src
+  Modules: Middleware, Context, Logger
+  FindlibName: example_middleware
+
+Executable test
+  BuildTools: ocamlbuild
+  Path: tests
+  MainIs: all_test.ml
+  Build$: flag(tests)
+  CompiledObject: native
+  Install: false
+  BuildDepends: oUnit, example_middleware
+
+Test test
+  Run$:               flag(tests)
+  Command:            $test
+  WorkingDirectory:   tests
