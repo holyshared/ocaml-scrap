@@ -1,0 +1,36 @@
+OASISFormat: 0.4
+Name:        example                                        # プロジェクト名
+Version:     0.1.0                                          # バージョン
+Synopsis:    example                                        # ライブラリの説明
+Authors:     Noritaka Horio <holy.shared.design@gmail.com>　# 著作者
+License:     MIT                                            # ライセンス
+Plugins:     META (0.4), StdFiles (0.4), DevFiles (0.4)     # 使用するプラグイン
+BuildTools: ocamlbuild                                      # ビルドツール
+
+# ライブラリ名
+Library example
+  # ソースの場所
+  Path:       src
+  # ビルドするモジュール
+  Modules: Example
+
+# テスト用のバイナリの名前
+Executable test
+　# テストコードの場所
+  Path: tests
+  # テストコードのエントリポイント
+  MainIs: test.ml
+  Build$: flag(tests)
+  # ビルド結果のフォーマット(ネイティブなバイナリ、バイトコードにもできる)
+  CompiledObject: native
+  # 配布する必要がないので、false
+  Install: false
+  # 依存しているモジュールoUnitとテスト対象のライブラリを指定
+  BuildDepends: oUnit, example
+
+Test test
+  Run$:               flag(tests)
+  # テストコマンド
+  Command:            $test
+  # テストを実行するワーキングディレクトリ
+  WorkingDirectory:   tests
