@@ -1,0 +1,16 @@
+OASISFormat: 0.4
+Name:        example_json
+Version:     0.1.0
+Synopsis:    example_json
+Authors:     Noritaka Horio <holy.shared.design@gmail.com>
+License:     MIT
+Plugins:     META (0.4), StdFiles (0.4), DevFiles (0.4)
+BuildTools:  ocamlbuild
+PreBuildCommand:
+  atdgen -t src/report.atd
+  atdgen -j src/report.atd
+
+Executable example_json
+  Path:       src
+  MainIs:     example_json.ml
+  CompiledObject: native
