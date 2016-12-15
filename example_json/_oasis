@@ -14,3 +14,4 @@ Executable example_json
   Path:       src
   MainIs:     example_json.ml
   CompiledObject: native
+  BuildDepends: atdgen

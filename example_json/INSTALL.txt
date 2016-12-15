@@ -1,5 +1,5 @@
 (* OASIS_START *)
-(* DO NOT EDIT (digest: 5178b84603a8a096608183b7d4155c4f) *)
+(* DO NOT EDIT (digest: d4683d48f9ff003cfa79088aef7c47ff) *)
 
 This is the INSTALL file for the example_json distribution.
 
@@ -12,6 +12,7 @@ Dependencies
 In order to compile this package, you will need:
                                                 * ocaml
                                                 * findlib
+                                                * atdgen
 
 Installing
 ==========

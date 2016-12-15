@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: 11a34735cc9b89af10acdfd452aa9c2e)
+# DO NOT EDIT (digest: 7abd7815df420f328b04ee5f1364e884)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -15,4 +15,6 @@ true: annot, bin_annot
 "_darcs": -traverse
 "_darcs": not_hygienic
 # Executable example_json
+"src/example_json.native": pkg_atdgen
+<src/*.ml{,i,y}>: pkg_atdgen
 # OASIS_STOP
