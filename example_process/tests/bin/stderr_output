@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+echo "example1" >&2
+echo "example2" >&2
+echo "example3" >&2
