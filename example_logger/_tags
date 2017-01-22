@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: 8288ac4b290b790221d115a1bc1131e7)
+# DO NOT EDIT (digest: fb2579417ff586e89f1ecc192d386e43)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -14,5 +14,9 @@ true: annot, bin_annot
 ".git": not_hygienic
 "_darcs": -traverse
 "_darcs": not_hygienic
+# Library logger
+"src/logger.cmxs": use_logger
 # Executable example_logger
+"src/example_logger.native": use_logger
+<src/*.ml{,i,y}>: use_logger
 # OASIS_STOP

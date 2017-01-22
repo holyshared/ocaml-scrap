@@ -7,7 +7,12 @@ License:     MIT
 Plugins:     META (0.4), DevFiles (0.4)
 BuildTools:  ocamlbuild
 
+Library logger
+  Path: src
+  Modules: Logger
+
 Executable example_logger
-  Path:       src
-  MainIs:     example_logger.ml
+  Path: src
+  MainIs: example_logger.ml
   CompiledObject: native
+  BuildDepends: logger

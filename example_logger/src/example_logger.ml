@@ -1,13 +1,6 @@
-type logger = {
-  debug: (string -> unit);
-  error: (string -> unit);
-}
-
-let create ?(o=stdout) ?(e=stderr) () =
-  let debug s = output_string o s in
-  let error s = output_string e s in
-  { debug=debug; error=error }
-
 let () =
-  let logger = create () in
-  logger.debug "ok!!"
+  Logger.init ~out:stdout ~out_error:stderr ();
+  Logger.debug "%s %s %s" "a" "b" "c";
+  Logger.error "%s %s %s" "a" "b" "c";
+  Logger.debug "%s %s %s %s" "a" "b" "c" "d";
+  Logger.error "%s %s %s %s" "a" "b" "c" "d";

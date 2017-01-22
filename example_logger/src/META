@@ -1,0 +1,11 @@
+# OASIS_START
+# DO NOT EDIT (digest: d4f8c4ab16a68363c1bd43ca8585a998)
+version = "0.1.0"
+description = "logger examples"
+archive(byte) = "logger.cma"
+archive(byte, plugin) = "logger.cma"
+archive(native) = "logger.cmxa"
+archive(native, plugin) = "logger.cmxs"
+exists_if = "logger.cma"
+# OASIS_STOP
+
