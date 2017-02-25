@@ -7,8 +7,12 @@ License:     MIT
 Plugins:     META (0.4), DevFiles (0.4)
 BuildTools:  ocamlbuild
 
+Library lwt_example
+  Path:       src
+  Modules: File_reader
+
 Executable example_lwt
   Path: src
   MainIs: example_lwt.ml
   CompiledObject: native
-  BuildDepends: lwt.unix
+  BuildDepends: lwt.unix, lwt_example

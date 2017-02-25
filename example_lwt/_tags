@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: 558b952eb1621ee8ac79299a6866df00)
+# DO NOT EDIT (digest: 1b250bf5b6bb70e01087f2877ce86ba8)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -14,7 +14,11 @@ true: annot, bin_annot
 ".git": not_hygienic
 "_darcs": -traverse
 "_darcs": not_hygienic
+# Library lwt_example
+"src/lwt_example.cmxs": use_lwt_example
 # Executable example_lwt
 "src/example_lwt.native": pkg_lwt.unix
+"src/example_lwt.native": use_lwt_example
 <src/*.ml{,i,y}>: pkg_lwt.unix
+<src/*.ml{,i,y}>: use_lwt_example
 # OASIS_STOP

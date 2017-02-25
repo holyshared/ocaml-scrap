@@ -1,0 +1,11 @@
+# OASIS_START
+# DO NOT EDIT (digest: 9bada20b23ed24c29293baa568988ed4)
+version = "0.1.0"
+description = "lwt examples"
+archive(byte) = "lwt_example.cma"
+archive(byte, plugin) = "lwt_example.cma"
+archive(native) = "lwt_example.cmxa"
+archive(native, plugin) = "lwt_example.cmxs"
+exists_if = "lwt_example.cma"
+# OASIS_STOP
+
