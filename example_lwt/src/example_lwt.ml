@@ -7,7 +7,8 @@ let map_thread =
   let started_message s = "started: " ^ s in
   Lwt.map started_message root
 
-let mulit_threads =
+(** multi_thread *)
+let multi_threads =
   let tasks = [
     Lwt.return "thread - 1";
     Lwt.return "thread - 2";
