@@ -7,9 +7,14 @@ License:     MIT
 Plugins:     META (0.4), DevFiles (0.4)
 BuildTools:  ocamlbuild
 
+Library pull_request
+  Path:       src
+  Modules: Pull_request
+  BuildDepends: github.unix, lwt, cohttp, cohttp.lwt, uri, cohttp.lwt-core, yojson, atdgen, bytes
+
 Executable example_github
   Path:       src
-  MainIs:     example_github.ml
+  MainIs:     ugithub.ml
   CompiledObject: native
   BuildDepends:
-    github.unix, lwt, cohttp, cohttp.lwt, uri, cohttp.lwt-core, yojson, atdgen, bytes
+    github.unix, lwt, cohttp, cohttp.lwt, uri, cohttp.lwt-core, yojson, atdgen, bytes, cmdliner

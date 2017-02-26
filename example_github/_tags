@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: a59a8c3f1315ff5f0df3fc017895abca)
+# DO NOT EDIT (digest: 36f90113f0059becae5c2b5d2caa4d8b)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -14,18 +14,22 @@ true: annot, bin_annot
 ".git": not_hygienic
 "_darcs": -traverse
 "_darcs": not_hygienic
+# Library pull_request
+"src/pull_request.cmxs": use_pull_request
 # Executable example_github
-"src/example_github.native": pkg_atdgen
-"src/example_github.native": pkg_bytes
-"src/example_github.native": pkg_cohttp
-"src/example_github.native": pkg_cohttp.lwt
-"src/example_github.native": pkg_cohttp.lwt-core
-"src/example_github.native": pkg_github.unix
-"src/example_github.native": pkg_lwt
-"src/example_github.native": pkg_uri
-"src/example_github.native": pkg_yojson
+"src/ugithub.native": pkg_atdgen
+"src/ugithub.native": pkg_bytes
+"src/ugithub.native": pkg_cmdliner
+"src/ugithub.native": pkg_cohttp
+"src/ugithub.native": pkg_cohttp.lwt
+"src/ugithub.native": pkg_cohttp.lwt-core
+"src/ugithub.native": pkg_github.unix
+"src/ugithub.native": pkg_lwt
+"src/ugithub.native": pkg_uri
+"src/ugithub.native": pkg_yojson
 <src/*.ml{,i,y}>: pkg_atdgen
 <src/*.ml{,i,y}>: pkg_bytes
+<src/*.ml{,i,y}>: pkg_cmdliner
 <src/*.ml{,i,y}>: pkg_cohttp
 <src/*.ml{,i,y}>: pkg_cohttp.lwt
 <src/*.ml{,i,y}>: pkg_cohttp.lwt-core

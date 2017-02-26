@@ -1,0 +1,13 @@
+# OASIS_START
+# DO NOT EDIT (digest: 952808f3deb4fad431107c27ffbb9edc)
+version = "0.1.0"
+description = "github examples"
+requires =
+"github.unix lwt cohttp cohttp.lwt uri cohttp.lwt-core yojson atdgen bytes"
+archive(byte) = "pull_request.cma"
+archive(byte, plugin) = "pull_request.cma"
+archive(native) = "pull_request.cmxa"
+archive(native, plugin) = "pull_request.cmxs"
+exists_if = "pull_request.cma"
+# OASIS_STOP
+
