@@ -1,4 +1,5 @@
 open Cmdliner
+open Pull_request
 
 let user =
   let doc = "user name of github" in
@@ -9,7 +10,7 @@ let repo =
   Arg.(value & opt string "ocaml-scrap" & info ["repo"] ~doc)
 
 let print_of_pull_requests user repo =
-  Pull_request.print_of_pull_requests ~user:user ~repo:repo
+  print_of_pull_requests ~user:user ~repo:repo
 
 let pull_requests_t = Term.(const print_of_pull_requests $ user $ repo)
 
