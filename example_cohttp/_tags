@@ -1,0 +1,28 @@
+# OASIS_START
+# DO NOT EDIT (digest: ffae3fa7931ce4860c227ae9532f75a4)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
+# useless stuff for the build process
+true: annot, bin_annot
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Library github
+"src/github.cmxs": use_github
+# Executable example_cohttp
+"src/example_cohttp.native": pkg_cohttp
+"src/example_cohttp.native": pkg_cohttp.lwt
+"src/example_cohttp.native": pkg_lwt
+"src/example_cohttp.native": use_github
+<src/*.ml{,i,y}>: pkg_cohttp
+<src/*.ml{,i,y}>: pkg_cohttp.lwt
+<src/*.ml{,i,y}>: pkg_lwt
+<src/*.ml{,i,y}>: use_github
+# OASIS_STOP
