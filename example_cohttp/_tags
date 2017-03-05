@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: ffae3fa7931ce4860c227ae9532f75a4)
+# DO NOT EDIT (digest: 7429d78eedf4aa00a246067c83b4030e)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -17,10 +17,12 @@ true: annot, bin_annot
 # Library github
 "src/github.cmxs": use_github
 # Executable example_cohttp
+"src/example_cohttp.native": pkg_atdgen
 "src/example_cohttp.native": pkg_cohttp
 "src/example_cohttp.native": pkg_cohttp.lwt
 "src/example_cohttp.native": pkg_lwt
 "src/example_cohttp.native": use_github
+<src/*.ml{,i,y}>: pkg_atdgen
 <src/*.ml{,i,y}>: pkg_cohttp
 <src/*.ml{,i,y}>: pkg_cohttp.lwt
 <src/*.ml{,i,y}>: pkg_lwt

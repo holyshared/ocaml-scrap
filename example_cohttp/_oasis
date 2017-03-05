@@ -6,11 +6,14 @@ Authors:     Noritka Horio <holy.shared.design@gmail.com>
 License:     MIT
 Plugins:     META (0.4), DevFiles (0.4)
 BuildTools:  ocamlbuild
+PreBuildCommand:
+  atdgen -t src/github.atd
+  atdgen -j src/github.atd
 
 Library github
   Path: src
-  Modules: Github
-  BuildDepends: lwt, cohttp, cohttp.lwt
+  Modules: Github, Github_t, Github_j
+  BuildDepends: lwt, cohttp, cohttp.lwt, atdgen
 
 Executable example_cohttp
   Path: src

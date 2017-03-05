@@ -1,8 +1,8 @@
 # OASIS_START
-# DO NOT EDIT (digest: 3da8a578d2c3c8a7fa62019868547177)
+# DO NOT EDIT (digest: e77070a1f97341fdccdd76d86c6cd6f0)
 version = "0.1.0"
 description = "cohttp examples"
-requires = "lwt cohttp cohttp.lwt"
+requires = "lwt cohttp cohttp.lwt atdgen"
 archive(byte) = "github.cma"
 archive(byte, plugin) = "github.cma"
 archive(native) = "github.cmxa"
