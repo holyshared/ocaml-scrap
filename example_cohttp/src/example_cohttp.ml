@@ -9,8 +9,8 @@ let env name =
 
 let create_commit_comment_by token =
   let client = init ~token:token ~user:"holyshared" ~repo:"ocaml-scrap" in
-  let content = { path="a"; position=1; commit_id="9fb6ec6a2056276211898736ae797a0c31b53af8"; body="nyan, nyan" } in
-  let res = create_commit_comment client ~num:1 ~content:content in
+  let content = { path="README.md"; position=1; commit_id="db56442e1ab59a21951c5c7d403c30e5d36032cb"; body="nyan, nyan" } in
+  let res = create_commit_comment client ~num:2 ~content:content in
   print_endline (Lwt_main.run res)
 
 let () =
