@@ -1,0 +1,8 @@
+(* OASIS_START *)
+(* DO NOT EDIT (digest: af4ab24a9535df38c26106b75b78bd66) *)
+
+Authors of first_class_module:
+
+* Noritaka Horio
+
+(* OASIS_STOP *)
