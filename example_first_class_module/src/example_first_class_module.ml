@@ -16,6 +16,10 @@ let create_print_formatter () =
 let () =
   let module A = (val create_formatter ()) in
   let module B = (val create_print_formatter ()) in
+  let ctx = {
+    formatter=(module B)
+  } in
   print_endline (Logger.format_for_info (module A) "%s %s" "a" "v");
   Logger.info (module B) "%s %s" "first" "second";
   Logger.info (module B) "%s %s %s" "first" "second" "third";
+  Logger.info_t ctx "%s %s %s" "first" "second" "third";
