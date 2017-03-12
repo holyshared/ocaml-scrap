@@ -9,7 +9,7 @@ BuildTools: ocamlbuild
 
 Library logger
   Path: src
-  Modules: Formatter
+  Modules: Formatter, Logger
 
 Executable example_first_class_module
   Path: src

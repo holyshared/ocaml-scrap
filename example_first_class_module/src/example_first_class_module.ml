@@ -1,8 +1,7 @@
 open Formatter
 
 let () =
-  let module Formatter2 = (struct
+  let module A = (struct
     let info format = Printf.sprintf format
   end) in
-  print_endline (Formatter2.info "%s" "ddd");
-  print_endline (Formatter2.info "%s %s" "ddd" "ddd");
+  print_endline (Logger.info (module A) "%s %s" "a" "v")
