@@ -1,4 +1,5 @@
 open Formatter
+open Logger
 
 let create_formatter () =
   let module A = (struct
