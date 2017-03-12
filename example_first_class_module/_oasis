@@ -5,8 +5,14 @@ Synopsis:    example
 Authors:     Noritaka Horio
 License:     MIT
 Plugins:     META (0.4), StdFiles (0.4), DevFiles (0.4)
+BuildTools: ocamlbuild
+
+Library logger
+  Path: src
+  Modules: Formatter
+
 Executable example_first_class_module
-  Path:       src
+  Path: src
   CompiledObject: native
-  BuildTools: ocamlbuild
-  MainIs:     example_first_class_module.ml
+  MainIs: example_first_class_module.ml
+  BuildDepends: logger
