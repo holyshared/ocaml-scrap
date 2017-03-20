@@ -7,3 +7,8 @@ end
 module type PrintFormatter_type = sig
   val info: ('a, out_channel, unit) format -> 'a
 end
+
+module type OuputFormatter_type = sig
+  val t: out_channel
+  val info: ('a, out_channel, unit) format -> 'a
+end
