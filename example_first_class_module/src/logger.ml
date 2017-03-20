@@ -1,17 +1,18 @@
-open Formatter
-
-type t = {
-  formatter: (module PrintFormatter_type)
+(** logger config *)
+type config = {
+  output: out_channel
 }
 
-let format_for_info (f: (module Formatter_type)) format =
-  let module Formatter = (val f) in
-  Formatter.info format
+(** logger module signiture *)
+module type Logger_t = sig
+  val t: config
+  val info: ('a, out_channel, unit) format -> 'a
+end
 
-let info (f: (module PrintFormatter_type)) format =
-  let module Formatter = (val f) in
-  Formatter.info format
-
-let info_t t format =
-  let module Formatter = (val t.formatter) in
-  Formatter.info format
+let create out =
+  let config = { output=out } in
+  let module Logger = (struct
+    let t = config
+    let info format = Printf.fprintf t.output format
+  end) in
+  (module Logger: Logger_t)
