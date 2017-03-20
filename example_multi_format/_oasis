@@ -9,7 +9,7 @@ BuildTools: ocamlbuild
 
 Library formatter
   Path: src
-  Modules: Formatter
+  Modules: Formatter, Logger
 
 Executable multi_format
   Path: src
