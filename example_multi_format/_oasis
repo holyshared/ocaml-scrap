@@ -1,0 +1,18 @@
+OASISFormat: 0.4
+Name:        multi_format
+Version:     0.1.0
+Synopsis:    example
+Authors:     Noritaka Horio
+License:     MIT
+Plugins:     META (0.4), StdFiles (0.4), DevFiles (0.4)
+BuildTools: ocamlbuild
+
+Library formatter
+  Path: src
+  Modules: Formatter
+
+Executable multi_format
+  Path: src
+  CompiledObject: native
+  MainIs: multi_format.ml
+  BuildDepends: formatter

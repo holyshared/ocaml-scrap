@@ -1,0 +1,8 @@
+(* OASIS_START *)
+(* DO NOT EDIT (digest: 78094887a7d3d3a766199db8ab4c6972) *)
+
+Authors of multi_format:
+
+* Noritaka Horio
+
+(* OASIS_STOP *)

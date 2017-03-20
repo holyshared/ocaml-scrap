@@ -1,0 +1,11 @@
+# OASIS_START
+# DO NOT EDIT (digest: 77c1eeee913f49b6abc5e337ea542a39)
+version = "0.1.0"
+description = "example"
+archive(byte) = "formatter.cma"
+archive(byte, plugin) = "formatter.cma"
+archive(native) = "formatter.cmxa"
+archive(native, plugin) = "formatter.cmxs"
+exists_if = "formatter.cma"
+# OASIS_STOP
+
