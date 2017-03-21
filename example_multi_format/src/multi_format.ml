@@ -7,6 +7,16 @@ let formatter () =
   end) in
   (module F: Formatter_t)
 
+let appender out = Appender.create out
+
+let appenders outputs =
+  List.map (fun o -> appender o) outputs
+
+let put appenders s =
+  List.iter (fun appender ->
+    let module Appender = (val appender: Appender.LogAppender) in
+    Appender.put s) appenders
+
 (*
 let f (logger: (module Logger_t)) =
   let module Logger = (val logger) in
@@ -55,10 +65,16 @@ let () =
   let module F = (val formatter ()) in
   let module L1 = (val create ~out:stdout ~formatter: (module F: Formatter_t)) in
   let module L2 = (val create ~out:stdout ~formatter: (module F: Formatter_t)) in
+  let module A1 = (val appender stdout) in
+  let module A2 = (val appender stdout) in
   let loggers = [(module L1: Logger_t); (module L2: Logger_t)] in
 
   let a = f3 loggers "%s %s\n" in
   List.iter (fun f -> f "d" "f") a;
+
+  A1.put "aaa";
+
+  put [(module A1: Appender.LogAppender); (module A1: Appender.LogAppender)] "aaaa";
 
 (*
   f2 loggers "%s %s\n" "d" "f";
