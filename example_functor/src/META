@@ -1,0 +1,11 @@
+# OASIS_START
+# DO NOT EDIT (digest: 39aab1b6fcda61353d4087633c01f64c)
+version = "0.1.0"
+description = "functor examples"
+archive(byte) = "functor.cma"
+archive(byte, plugin) = "functor.cma"
+archive(native) = "functor.cmxa"
+archive(native, plugin) = "functor.cmxs"
+exists_if = "functor.cma"
+# OASIS_STOP
+
