@@ -15,18 +15,21 @@ let print_value v =
     | Tag _ -> print_endline "tag!!"
     | Tree _ -> print_endline "tree!!"
 
-let master_commit ?(root=Sys.getcwd ()) ?(level=6) () =
-    FS.create ~root:root ~level () >>=
-    (fun repo ->
-      FS.read_reference_exn repo Reference.master >>= (fun hash -> FS.read repo hash)
-    ) >>= (fun value ->
-      let a = match value with
+let master_of_commit repo =
+  let read_reference = FS.read_reference_exn repo Reference.master in
+  let read hash = FS.read repo hash in
+  let print_for_value value =
+    Lwt.return (
+      match value with
         | Some v -> print_value v
-        | None -> print_endline "none!!" in
-      Lwt.return a
-    )
+        | None -> print_endline "none!!"
+    ) in
+  read_reference >>= read >>= print_for_value
 
 let master ?(root=Sys.getcwd ()) () =
-  Lwt_main.run (
-    Lwt.catch (fun () -> master_commit ~root ()) (fun exn -> print_endline (Printexc.to_string exn); Lwt.return_unit)
-  )
+  let run () =
+    (FS.create ~root:root ()) >>= (fun repo -> master_of_commit repo) in
+  let faild exn =
+    print_endline (Printexc.to_string exn);
+    Lwt.return_unit in
+  Lwt_main.run (Lwt.catch run faild)
