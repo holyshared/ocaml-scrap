@@ -21,13 +21,3 @@ let head ?(root=Sys.getcwd ()) () =
       match head with
         | Some hd -> Lwt.return (print_head hd)
         | None -> Lwt.return (print_endline "head noting"))
-
-(*
-  let repo = Lwt_main.run (FS.create ~root:root ()) in
-  print_endline "head start1";
-  let head = Lwt_main.run (FS.read_head repo) in
-  print_endline "head start2";
-  match head with
-    | Some hd -> print_head hd
-    | None -> print_endline "head noting"
-*)
