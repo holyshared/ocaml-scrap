@@ -2,22 +2,31 @@ open Lwt_main
 open Lwt.Infix
 
 module FS = Git_unix.FS
-module Commit = Git.Hash.Commit
+module Hash = Git_unix.Hash_IO
+module Commit = Git_unix.Hash_IO.Commit
 module Reference = Git.Reference
 
-let print_head hd =
-  let open Commit in
-  let open Reference in
-  print_endline "print head start";
-  match hd with
-    | Hash commit -> print_endline ("commit - " ^ (Commit.to_hex commit))
-    | Ref value -> print_endline ("ref - " ^ (to_raw value))
+let print_value v =
+  let open Git.Value in
+  let open Git.Commit in
+  match v with
+    | Commit v -> print_endline ("commit!! " ^ v.message)
+    | Blob _ -> print_endline "blob!!"
+    | Tag _ -> print_endline "tag!!"
+    | Tree _ -> print_endline "tree!!"
 
-let head ?(root=Sys.getcwd ()) () =
-  Lwt_main.run ((FS.create ~root:root ()) >>= (fun repo ->
-    print_endline "head start1";
-    FS.read_head repo) >>= fun head ->
-      print_endline "head start2";
-      match head with
-        | Some hd -> Lwt.return (print_head hd)
-        | None -> Lwt.return (print_endline "head noting"))
+let master_commit ?(root=Sys.getcwd ()) ?(level=6) () =
+    FS.create ~root:root ~level () >>=
+    (fun repo ->
+      FS.read_reference_exn repo Reference.master >>= (fun hash -> FS.read repo hash)
+    ) >>= (fun value ->
+      let a = match value with
+        | Some v -> print_value v
+        | None -> print_endline "none!!" in
+      Lwt.return a
+    )
+
+let master ?(root=Sys.getcwd ()) () =
+  Lwt_main.run (
+    Lwt.catch (fun () -> master_commit ~root ()) (fun exn -> print_endline (Printexc.to_string exn); Lwt.return_unit)
+  )

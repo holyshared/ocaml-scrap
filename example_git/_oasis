@@ -17,6 +17,14 @@ Library lib_git_test
   Modules:    Repository_test
   BuildDepends: git.unix
 
+Executable example_git
+  Path: src
+  MainIs: example_git.ml
+  CompiledObject: native
+  Install: false
+  BuildDepends:
+    lib_git
+
 Executable test
   Path: tests
   MainIs: test.ml

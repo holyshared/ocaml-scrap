@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: 59c6d16bc10c8bb80d3efabf05b62509)
+# DO NOT EDIT (digest: b25df164e8c9c16c8c4579d8ae675f69)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -16,11 +16,17 @@ true: annot, bin_annot
 "_darcs": not_hygienic
 # Library lib_git
 "src/lib_git.cmxs": use_lib_git
+# Library lib_git_test
+"tests/lib_git_test.cmxs": use_lib_git_test
+# Executable example_git
+"src/example_git.native": pkg_git
+"src/example_git.native": pkg_git.unix
+"src/example_git.native": pkg_lwt
+"src/example_git.native": use_lib_git
 <src/*.ml{,i,y}>: pkg_git
 <src/*.ml{,i,y}>: pkg_git.unix
 <src/*.ml{,i,y}>: pkg_lwt
-# Library lib_git_test
-"tests/lib_git_test.cmxs": use_lib_git_test
+<src/*.ml{,i,y}>: use_lib_git
 # Executable test
 "tests/test.native": pkg_git
 "tests/test.native": pkg_git.unix
