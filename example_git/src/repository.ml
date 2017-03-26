@@ -6,11 +6,17 @@ module Hash = Git_unix.Hash_IO
 module Commit = Git_unix.Hash_IO.Commit
 module Reference = Git.Reference
 
+let print_commit v =
+  let open Git.Commit in
+  let open Git.User in
+  let committer v = "commiter: " ^ v.name ^ "<" ^ v.email ^ ">" in
+  print_endline (committer v.committer);
+  print_endline ("message: " ^ v.message)
+
 let print_value v =
   let open Git.Value in
-  let open Git.Commit in
   match v with
-    | Commit v -> print_endline ("commit!! " ^ v.message)
+    | Commit v -> print_commit v
     | Blob _ -> print_endline "blob!!"
     | Tag _ -> print_endline "tag!!"
     | Tree _ -> print_endline "tree!!"
