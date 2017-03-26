@@ -1,0 +1,8 @@
+(* OASIS_START *)
+(* DO NOT EDIT (digest: 001b62cbe2d2b39a9dcfa2cd73b5589a) *)
+
+Authors of example-git:
+
+* Noritaka Horio
+
+(* OASIS_STOP *)

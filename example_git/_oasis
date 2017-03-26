@@ -1,0 +1,32 @@
+OASISFormat: 0.4
+Name:        example-git
+Version:     0.1.0
+Synopsis:    example git
+Authors:     Noritaka Horio
+License:     MIT
+Plugins:     META (0.4), StdFiles (0.4), DevFiles (0.4)
+BuildTools: ocamlbuild
+
+Library lib_git
+  Path:       src
+  Modules:    Repository
+  BuildDepends: lwt, git, git.unix
+
+Library lib_git_test
+  Path:       tests
+  Modules:    Repository_test
+  BuildDepends: git.unix
+
+Executable test
+  Path: tests
+  MainIs: test.ml
+  Build$: flag(tests)
+  CompiledObject: native
+  Install: false
+  BuildDepends:
+    lib_git, oUnit, lib_git_test
+
+Test test
+  Run$:               flag(tests)
+  Command:            $test
+  WorkingDirectory:   tests

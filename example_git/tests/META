@@ -1,0 +1,12 @@
+# OASIS_START
+# DO NOT EDIT (digest: a7688e64fc31e58b8fd262f2fc11e170)
+version = "0.1.0"
+description = "example git"
+requires = "git.unix"
+archive(byte) = "lib_git_test.cma"
+archive(byte, plugin) = "lib_git_test.cma"
+archive(native) = "lib_git_test.cmxa"
+archive(native, plugin) = "lib_git_test.cmxs"
+exists_if = "lib_git_test.cma"
+# OASIS_STOP
+
