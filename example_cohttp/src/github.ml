@@ -35,3 +35,13 @@ let create_commit_comment t ~num ~content =
   Client.post (Uri.of_string uri) ~body:(`String body) ~headers:headers >>= fun (res, body) ->
   print_endline (string_of_int (status_code_of_response res));
   body_of_response body
+
+let create_review_request t ~num ~content =
+  let headers = headers_of_api t.token in
+  let body = Github_j.string_of_review content in
+  let uri = "https://api.github.com/repos/" ^ t.user ^ "/" ^ t.repo ^ "/pulls/" ^ (string_of_int num) ^ "/reviews" in
+  print_endline uri;
+  print_endline body;
+  Client.post (Uri.of_string uri) ~body:(`String body) ~headers:headers >>= fun (res, body) ->
+  print_endline (string_of_int (status_code_of_response res));
+  body_of_response body
