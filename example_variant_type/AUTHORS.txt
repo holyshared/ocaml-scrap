@@ -1,0 +1,8 @@
+(* OASIS_START *)
+(* DO NOT EDIT (digest: cac2f00665f4bf6b85734f1b95edf1ea) *)
+
+Authors of example-variant-type:
+
+* Noritaka Horio
+
+(* OASIS_STOP *)

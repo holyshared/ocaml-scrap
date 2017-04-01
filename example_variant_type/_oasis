@@ -1,0 +1,14 @@
+OASISFormat: 0.4
+Name:        example-variant-type
+Version:     0.1.0
+Synopsis:    example variant type
+Authors:     Noritaka Horio
+License:     MIT
+Plugins:     META (0.4), StdFiles (0.4), DevFiles (0.4)
+BuildTools: ocamlbuild
+
+Executable variant_type
+  Path: src
+  MainIs: variant_type.ml
+  CompiledObject: native
+  Install: false
