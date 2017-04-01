@@ -36,7 +36,7 @@ let create_commit_comment t ~num ~content =
   print_endline (string_of_int (status_code_of_response res));
   body_of_response body
 
-let create_review_request t ~num ~content =
+let create_review t ~num ~content =
   let headers = headers_of_api t.token in
   let body = Github_j.string_of_review content in
   let uri = "https://api.github.com/repos/" ^ t.user ^ "/" ^ t.repo ^ "/pulls/" ^ (string_of_int num) ^ "/reviews" in
