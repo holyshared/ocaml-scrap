@@ -44,11 +44,11 @@ let execute_task name =
     | CommitComment -> create_review_by ""
     | Unknown -> Error "Unknown task name"
 
-let execute_task_if name f =
+let execute_task_if name_f f =
   let execute task_name = match f task_name with
     | Ok _ -> print_endline "done"; ()
     | Error e -> failed e in
-  match (env name) with
+  match name_f with
     | Some task_name -> execute task_name
     | None -> failed "task is empty"
 
@@ -73,5 +73,5 @@ let check_task env_variables =
 
 let () =
   match check_task ["TASK"; "GITHUB_TOKEN"] with
-    | Ok _ -> execute_task_if "TASK" execute_task
+    | Ok _ -> execute_task_if (env "TASK") execute_task
     | Error e -> failed e
