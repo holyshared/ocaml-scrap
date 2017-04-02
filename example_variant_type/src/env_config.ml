@@ -9,30 +9,14 @@ module type S = sig
   val print: o -> unit
 end
 
-let string_of_variable v =
-  let variable_to_string v =
-    match v with
-      | Host v -> v
-      | Port v -> v in
-  match v with
-    | Some v -> variable_to_string v
-    | None -> "empty"
-
-let value name value =
-  match name with
-    | "HOST" -> Ok (Host value)
-    | "PORT" -> Ok (Port value)
-  | _ -> Error ("Undefined: " ^ name)
-
-module Make(T: Env.S): S = struct
-  type v = config_variable
-  type o = (string, v option) Hashtbl.t
-
+module Make(T: Env.S) (V: Env_variable.S): S = struct
+  type v = V.v
+  type o = (string, V.vo) Hashtbl.t
   let append_to t name =
     match T.pick name with
       | Some v ->
         let unwrap name v =
-          match value name v with
+          match V.value_of_string name v with
             | Ok v -> Hashtbl.add t name (Some v); Ok t
             | Error e -> Error e in
         unwrap name v
@@ -52,10 +36,6 @@ module Make(T: Env.S): S = struct
 
   let print t =
     let print_of_variable k v =
-      print_endline (k ^ ":" ^ (string_of_variable v)) in
+      print_endline (k ^ ":" ^ (V.string_of_variable v)) in
     Hashtbl.iter print_of_variable t
 end
-
-include Make(struct
-  let pick = Env.pick
-end)

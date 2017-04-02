@@ -9,7 +9,7 @@ BuildTools: ocamlbuild
 
 Library example_variant_type
   Path: src
-  Modules: Env, Env_config
+  Modules: Env, Env_config, Env_variable
 
 Executable variant_type
   Path: src
