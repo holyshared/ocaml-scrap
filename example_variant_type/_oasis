@@ -7,8 +7,13 @@ License:     MIT
 Plugins:     META (0.4), StdFiles (0.4), DevFiles (0.4)
 BuildTools: ocamlbuild
 
+Library example_variant_type
+  Path: src
+  Modules: Env, Env_config
+
 Executable variant_type
   Path: src
   MainIs: variant_type.ml
   CompiledObject: native
   Install: false
+  BuildDepends: example_variant_type

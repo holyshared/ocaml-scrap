@@ -1,0 +1,11 @@
+# OASIS_START
+# DO NOT EDIT (digest: 32dc77d683e58900f2f7bb33dfd15805)
+version = "0.1.0"
+description = "example variant type"
+archive(byte) = "example_variant_type.cma"
+archive(byte, plugin) = "example_variant_type.cma"
+archive(native) = "example_variant_type.cmxa"
+archive(native, plugin) = "example_variant_type.cmxs"
+exists_if = "example_variant_type.cma"
+# OASIS_STOP
+

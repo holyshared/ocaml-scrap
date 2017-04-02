@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: 3f3495919c5795d1cff484549976441b)
+# DO NOT EDIT (digest: 9e2049df1579abf006cae942061b143e)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -14,5 +14,9 @@ true: annot, bin_annot
 ".git": not_hygienic
 "_darcs": -traverse
 "_darcs": not_hygienic
+# Library example_variant_type
+"src/example_variant_type.cmxs": use_example_variant_type
 # Executable variant_type
+"src/variant_type.native": use_example_variant_type
+<src/*.ml{,i,y}>: use_example_variant_type
 # OASIS_STOP
