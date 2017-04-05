@@ -1,7 +1,3 @@
-type config_variable =
-  | Host of string
-  | Port of string
-
 module type S = sig
   type v
   type o = (string, v option) Hashtbl.t
@@ -11,7 +7,7 @@ end
 
 module Make(T: Env.S) (V: Env_variable.S): S = struct
   type v = V.v
-  type o = (string, V.vo) Hashtbl.t
+  type o = (string, V.v option) Hashtbl.t
   let append_to t name =
     match T.pick name with
       | Some v ->
@@ -36,6 +32,6 @@ module Make(T: Env.S) (V: Env_variable.S): S = struct
 
   let print t =
     let print_of_variable k v =
-      print_endline (k ^ ":" ^ (V.string_of_variable v)) in
+      print_endline (k ^ ":" ^ (V.string_of_value v)) in
     Hashtbl.iter print_of_variable t
 end

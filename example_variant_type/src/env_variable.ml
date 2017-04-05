@@ -1,7 +1,5 @@
 module type S = sig
   type v
-  type vr = (v, string) result
-  type vo = v option
-  val value_of_string: string -> string -> vr
-  val string_of_variable: vo -> string
+  val value_of_string: string -> string -> (v, string) result
+  val string_of_value: v option -> string
 end

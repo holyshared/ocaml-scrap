@@ -24,10 +24,8 @@ module App_env = Env_config.Make(struct
   let pick = Env.pick
 end) (struct
   type v = config_variable
-  type vr = (config_variable, string) result
-  type vo = config_variable option
   let value_of_string = Config_variable.value_of_string
-  let string_of_variable = Config_variable.string_of_value
+  let string_of_value = Config_variable.string_of_value
 end)
 
 let () =
