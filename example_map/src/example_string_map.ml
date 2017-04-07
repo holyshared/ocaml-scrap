@@ -1,15 +1,11 @@
 module StringMap = Map.Make(String)
 
-let rec strings_into_map items lines =
-  match items with
-    | [] -> lines
-    | hd :: tl ->
-      let (k, v) = hd in
-      strings_into_map tl (StringMap.add k v lines)
+let pair_into_map pair m =
+  let (k, v) = pair in
+  StringMap.add k v m
 
 let string_map_from items =
-  let strings = StringMap.empty in
-  strings_into_map items strings
+  List.fold_right pair_into_map items (StringMap.empty)
 
 let print_pair k v =
   print_endline (k ^ " : " ^ v)
