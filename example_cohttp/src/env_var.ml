@@ -12,6 +12,12 @@ let get key m =
   with
     | Not_found -> None
 
+let require key m =
+  try
+    Ok (find key m)
+  with
+    | Not_found -> Error (key ^ " is required")
+
 let from pairs =
   let append pair m =
     let (k, v) = pair in

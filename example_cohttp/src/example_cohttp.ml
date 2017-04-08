@@ -2,41 +2,37 @@ open Lwt
 open Github
 open Github_t
 
-type task =
-  | CreateReview
-  | CommitComment
-  | Unknown
-
-let task_of_string = function
-  | "CREATE_REVIEW" -> CreateReview
-  | "CREATE_COMMIT_COMMRNT" -> CommitComment
-  | _ -> Unknown
-
 let failed e =
   print_endline e; exit 1
 
-let create_commit_comment_by token =
-  let client = init ~token:token ~user:"holyshared" ~repo:"ocaml-scrap" in
-  let content = { path="README.md"; position=1; commit_id="db56442e1ab59a21951c5c7d403c30e5d36032cb"; body="nyan, nyan" } in
-  let res = create_commit_comment client ~num:2 ~content:content in
-  print_endline (Lwt_main.run res);
-  Ok ()
+let create_commit_comment ~vars =
+  let content = {
+    path="README.md";
+    position=1;
+    commit_id="db56442e1ab59a21951c5c7d403c30e5d36032cb";
+    body="nyan, nyan"
+  } in
+  let create = Review.create_commit_comment ~user:"holyshared" ~repo:"ocaml-scrap" in
+  match Env_var.require "TOKEN" vars with
+    | Ok token -> create ~token ~num:2 ~content
+    | Error e -> Error e
 
-let create_review_by token =
-  let client = init ~token:token ~user:"holyshared" ~repo:"ocaml-scrap" in
+let create_review ~vars =
   let content = {
     body = "nyan, nyan";
     event = "COMMENT";
     comments = None;
   } in
-  let res = create_review client ~num:2 ~content:content in
-  print_endline (Lwt_main.run res);
-  Ok ()
+  let create = Review.create ~user:"holyshared" ~repo:"ocaml-scrap" in
+  match Env_var.require "TOKEN" vars with
+    | Ok token -> create ~token ~num:2 ~content
+    | Error e -> Error e
 
 let execute_task ~name ~vars =
+  let open Task in
   match task_of_string name with
-    | CreateReview -> create_review_by ""
-    | CommitComment -> create_commit_comment_by ""
+    | CreateReview -> create_review ~vars
+    | CommitComment -> create_commit_comment ~vars
     | Unknown -> Error "Unknown task name"
 
 let execute_task_if ~name ~vars ~f =
