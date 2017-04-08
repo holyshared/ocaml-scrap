@@ -27,6 +27,11 @@ let with_repo f vars =
     | Ok repo -> Ok (f ~repo)
     | Error e -> Error e
 
+let apply prev next vars =
+  match prev with
+    | Ok f -> next f vars
+    | Error e -> Error e
+
 let create_commit_comment ~vars =
   let content = {
     path="README.md";
@@ -45,17 +50,10 @@ let create_review ~vars =
     event = "COMMENT";
     comments = None;
   } in
-  let create = Review.create in
-  let create_with_token = with_token create vars in
-  let create_with_user =
-    match create_with_token with
-      | Ok f -> with_user f vars
-      | Error e -> Error e in
-  let create_with_repo =
-    match create_with_user with
-      | Ok f -> with_repo f vars
-      | Error e -> Error e in
-
-  match create_with_repo with
+  let apply_token f = apply f with_token vars in
+  let apply_user f = apply f with_user vars in
+  let apply_repo f = apply f with_repo vars in
+  let review = (apply_repo (apply_user (apply_token (Ok Review.create)))) in
+  match review with
     | Ok f -> f ~num:2 ~content
     | Error e -> Error e
