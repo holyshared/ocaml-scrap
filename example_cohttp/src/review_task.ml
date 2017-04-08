@@ -11,6 +11,22 @@ let task_of_string = function
   | "CREATE_COMMIT_COMMRNT" -> CommitComment
   | _ -> Unknown
 
+
+let with_token f vars =
+  match Env_var.require "GITHUB_TOKEN" vars with
+    | Ok token -> Ok (f ~token)
+    | Error e -> Error e
+
+let with_user f vars =
+  match Env_var.require "GITHUB_USER" vars with
+    | Ok user -> Ok (f ~user)
+    | Error e -> Error e
+
+let with_repo f vars =
+  match Env_var.require "GITHUB_REPO" vars with
+    | Ok repo -> Ok (f ~repo)
+    | Error e -> Error e
+
 let create_commit_comment ~vars =
   let content = {
     path="README.md";
@@ -30,8 +46,16 @@ let create_review ~vars =
     comments = None;
   } in
   let create = Review.create in
-  let with_user = create ~user:"holyshared" in
-  let with_repo = with_user ~repo:"ocaml-scrap" in
-  match Env_var.require "TOKEN" vars with
-    | Ok token -> with_repo ~token ~num:2 ~content
+  let create_with_token = with_token create vars in
+  let create_with_user =
+    match create_with_token with
+      | Ok f -> with_user f vars
+      | Error e -> Error e in
+  let create_with_repo =
+    match create_with_user with
+      | Ok f -> with_repo f vars
+      | Error e -> Error e in
+
+  match create_with_repo with
+    | Ok f -> f ~num:2 ~content
     | Error e -> Error e
