@@ -29,7 +29,9 @@ let create_review ~vars =
     event = "COMMENT";
     comments = None;
   } in
-  let create = Review.create ~user:"holyshared" ~repo:"ocaml-scrap" in
+  let create = Review.create in
+  let with_user = create ~user:"holyshared" in
+  let with_repo = with_user ~repo:"ocaml-scrap" in
   match Env_var.require "TOKEN" vars with
-    | Ok token -> create ~token ~num:2 ~content
+    | Ok token -> with_repo ~token ~num:2 ~content
     | Error e -> Error e
