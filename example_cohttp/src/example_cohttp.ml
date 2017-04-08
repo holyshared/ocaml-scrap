@@ -35,6 +35,27 @@ module Env_var = struct
       let (k, v) = pair in
       add k v m in
     List.fold_right append pairs (empty)
+
+  let check_env_variable name =
+    match (env name) with
+      | Some v -> Ok (name, v)
+      | None -> Error (name ^ " empty")
+
+  let requires env_variables =
+    let rec requires_all env_variables vars =
+      match env_variables with
+        | [] -> Ok vars
+        | hd::remains ->
+          match (check_env_variable hd) with
+            | Ok v -> requires_all remains (v::vars)
+            | Error e -> Error e in
+    let requires_all_variables variables vars =
+      match requires_all variables vars with
+        | Ok vars -> Ok vars
+        | Error e -> Error e in
+    match requires_all_variables env_variables [] with
+      | Ok vars -> Ok (from vars)
+      | Error e -> Error e
 end
 
 let create_commit_comment_by token =
@@ -69,28 +90,7 @@ let execute_task_if ~name ~vars ~f =
     | Some task_name -> execute task_name
     | None -> failed "task is empty"
 
-let check_env_variable name =
-  match (env name) with
-    | Some v -> Ok (name, v)
-    | None -> Error (name ^ " empty")
-
-let check_task env_variables =
-  let rec check_all env_variables vars =
-    match env_variables with
-      | [] -> Ok vars
-      | hd::remains ->
-        match (check_env_variable hd) with
-          | Ok v -> check_all remains (v::vars)
-          | Error e -> Error e in
-  let check_all_variables variables vars =
-    match check_all variables vars with
-      | Ok vars -> Ok vars
-      | Error e -> Error e in
-  match check_all_variables env_variables [] with
-    | Ok vars -> Ok (Env_var.from vars)
-    | Error e -> Error e
-
 let () =
-  match check_task ["TASK"; "GITHUB_TOKEN"] with
+  match Env_var.requires ["TASK"; "GITHUB_TOKEN"] with
     | Ok vars -> execute_task_if ~name:(Env_var.get "TASK" vars) ~vars ~f:execute_task
     | Error e -> failed e
