@@ -20,6 +20,23 @@ let env name =
     Some (Sys.getenv name)
   with Not_found -> None
 
+module Env_var = struct
+  module StringMap = Map.Make(String)
+  include StringMap
+
+  let get key m =
+    try
+      Some (find key m)
+    with
+      | Not_found -> None
+
+  let from pairs =
+    let append pair m =
+      let (k, v) = pair in
+      add k v m in
+    List.fold_right append pairs (empty)
+end
+
 let create_commit_comment_by token =
   let client = init ~token:token ~user:"holyshared" ~repo:"ocaml-scrap" in
   let content = { path="README.md"; position=1; commit_id="db56442e1ab59a21951c5c7d403c30e5d36032cb"; body="nyan, nyan" } in
@@ -38,40 +55,42 @@ let create_review_by token =
   print_endline (Lwt_main.run res);
   Ok ()
 
-let execute_task name =
+let execute_task ~name ~vars =
   match task_of_string name with
-    | CreateReview -> create_commit_comment_by ""
-    | CommitComment -> create_review_by ""
+    | CreateReview -> create_review_by ""
+    | CommitComment -> create_commit_comment_by ""
     | Unknown -> Error "Unknown task name"
 
-let execute_task_if name_f f =
-  let execute task_name = match f task_name with
+let execute_task_if ~name ~vars ~f =
+  let execute task_name = match f ~name:task_name ~vars with
     | Ok _ -> print_endline "done"; ()
     | Error e -> failed e in
-  match name_f with
+  match name with
     | Some task_name -> execute task_name
     | None -> failed "task is empty"
 
 let check_env_variable name =
   match (env name) with
-    | Some _ -> Ok ()
+    | Some v -> Ok (name, v)
     | None -> Error (name ^ " empty")
 
 let check_task env_variables =
-  let rec check_all env_variables =
+  let rec check_all env_variables vars =
     match env_variables with
-      | [] -> Ok ()
+      | [] -> Ok vars
       | hd::remains ->
         match (check_env_variable hd) with
-          | Ok _ -> check_all remains
+          | Ok v -> check_all remains (v::vars)
           | Error e -> Error e in
-  let check_all_variables variables =
-    match check_all variables with
-      | Ok _ -> Ok ()
-      | Error e -> failed e in
-  check_all_variables env_variables
+  let check_all_variables variables vars =
+    match check_all variables vars with
+      | Ok vars -> Ok vars
+      | Error e -> Error e in
+  match check_all_variables env_variables [] with
+    | Ok vars -> Ok (Env_var.from vars)
+    | Error e -> Error e
 
 let () =
   match check_task ["TASK"; "GITHUB_TOKEN"] with
-    | Ok _ -> execute_task_if (env "TASK") execute_task
+    | Ok vars -> execute_task_if ~name:(Env_var.get "TASK" vars) ~vars ~f:execute_task
     | Error e -> failed e
