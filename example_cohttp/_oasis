@@ -12,7 +12,7 @@ PreBuildCommand:
 
 Library github
   Path: src
-  Modules: Github, Github_t, Github_j, Env_var, Review, Task
+  Modules: Github, Github_t, Github_j, Env_var, Review, Review_task
   BuildDepends: lwt, cohttp, cohttp.lwt, atdgen
 
 Executable example_cohttp
