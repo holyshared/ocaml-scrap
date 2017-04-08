@@ -42,18 +42,19 @@ module Env_var = struct
       | None -> Error (name ^ " empty")
 
   let requires env_variables =
-    let rec requires_all env_variables vars =
-      match env_variables with
-        | [] -> Ok vars
-        | hd::remains ->
-          match (check_env_variable hd) with
-            | Ok v -> requires_all remains (v::vars)
-            | Error e -> Error e in
-    let requires_all_variables variables vars =
-      match requires_all variables vars with
-        | Ok vars -> Ok vars
-        | Error e -> Error e in
-    match requires_all_variables env_variables [] with
+    let append key vars =
+      match env key with
+        | Some v -> Ok ((key, v)::vars)
+        | None -> Error (key ^ " is required") in
+    let requires_all env_variables vars =
+      let require key o =
+        match o with
+          | Ok vars -> append key vars
+          | Error e -> Error e
+        in
+      List.fold_right require env_variables (Ok vars) in
+
+    match requires_all env_variables [] with
       | Ok vars -> Ok (from vars)
       | Error e -> Error e
 end
