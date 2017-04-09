@@ -27,7 +27,7 @@ let with_repo f vars =
     | Ok repo -> Ok (f ~repo)
     | Error e -> Error e
 
-let apply prev next vars =
+let apply_arg prev next vars =
   match prev with
     | Ok f -> next f vars
     | Error e -> Error e
@@ -50,10 +50,10 @@ let create_review ~vars =
     event = "COMMENT";
     comments = None;
   } in
-  let apply_token f = apply f with_token vars in
-  let apply_user f = apply f with_user vars in
-  let apply_repo f = apply f with_repo vars in
-  let review = (apply_repo (apply_user (apply_token (Ok Review.create)))) in
+  let apply_token f = apply_arg f with_token vars in
+  let apply_user f = apply_arg f with_user vars in
+  let apply_repo f = apply_arg f with_repo vars in
+  let review = Ok Review.create |> apply_token |> apply_user |> apply_repo in
   match review with
     | Ok f -> f ~num:2 ~content
     | Error e -> Error e
