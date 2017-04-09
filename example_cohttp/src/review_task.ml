@@ -12,25 +12,31 @@ let task_of_string = function
   | _ -> Unknown
 
 
-let with_token f vars =
+let token_with f vars =
   match Env_var.require "GITHUB_TOKEN" vars with
     | Ok token -> Ok (f ~token)
     | Error e -> Error e
 
-let with_user f vars =
+let user_with f vars =
   match Env_var.require "GITHUB_USER" vars with
     | Ok user -> Ok (f ~user)
     | Error e -> Error e
 
-let with_repo f vars =
+let repo_with f vars =
   match Env_var.require "GITHUB_REPO" vars with
     | Ok repo -> Ok (f ~repo)
     | Error e -> Error e
 
-let apply_arg prev next vars =
+let arg_with prev next vars =
   match prev with
     | Ok f -> next f vars
     | Error e -> Error e
+
+let args_with ~f ~vars =
+  let token f = arg_with f token_with vars in
+  let user f = arg_with f user_with vars in
+  let repo f = arg_with f repo_with vars in
+  Ok f |> token |> user |> repo
 
 let create_commit_comment ~vars =
   let content = {
@@ -39,9 +45,9 @@ let create_commit_comment ~vars =
     commit_id="db56442e1ab59a21951c5c7d403c30e5d36032cb";
     body="nyan, nyan"
   } in
-  let create = Review.create_commit_comment ~user:"holyshared" ~repo:"ocaml-scrap" in
-  match Env_var.require "TOKEN" vars with
-    | Ok token -> create ~token ~num:2 ~content
+  let create_commit_comment = args_with ~f:Review.create_commit_comment ~vars in
+  match create_commit_comment with
+    | Ok f -> f ~num:2 ~content
     | Error e -> Error e
 
 let create_review ~vars =
@@ -50,10 +56,7 @@ let create_review ~vars =
     event = "COMMENT";
     comments = None;
   } in
-  let apply_token f = apply_arg f with_token vars in
-  let apply_user f = apply_arg f with_user vars in
-  let apply_repo f = apply_arg f with_repo vars in
-  let review = Ok Review.create |> apply_token |> apply_user |> apply_repo in
+  let review = args_with ~f:Review.create ~vars in
   match review with
     | Ok f -> f ~num:2 ~content
     | Error e -> Error e
