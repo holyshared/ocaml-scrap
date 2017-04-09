@@ -14,5 +14,5 @@ type draft_review_comment = {
 type review = {
   body: string;
   event: string;
-  comments: (draft_review_comment list) option;
+  ?comments: (draft_review_comment list) option;
 }

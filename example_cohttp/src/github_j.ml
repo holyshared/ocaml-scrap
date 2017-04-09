@@ -704,15 +704,24 @@ let write_review : _ -> review -> _ = (
       Yojson.Safe.write_string
     )
       ob x.event;
-    if !is_first then
-      is_first := false
-    else
-      Bi_outbuf.add_char ob ',';
-    Bi_outbuf.add_string ob "\"comments\":";
-    (
-      write__2
-    )
-      ob x.comments;
+    (match x.comments with None -> () | Some x ->
+      if !is_first then
+        is_first := false
+      else
+        Bi_outbuf.add_char ob ',';
+      Bi_outbuf.add_string ob "\"comments\":";
+      (
+        fun ob x ->
+          Bi_outbuf.add_char ob '(';
+          (let x = x in
+          (
+            write__1
+          ) ob x
+          );
+          Bi_outbuf.add_char ob ')';
+      )
+        ob x;
+    );
     Bi_outbuf.add_char ob '}';
 )
 let string_of_review ?(len = 1024) x =
@@ -725,7 +734,7 @@ let read_review = (
     Yojson.Safe.read_lcurl p lb;
     let field_body = ref (Obj.magic (Sys.opaque_identity 0.0)) in
     let field_event = ref (Obj.magic (Sys.opaque_identity 0.0)) in
-    let field_comments = ref (Obj.magic (Sys.opaque_identity 0.0)) in
+    let field_comments = ref (None) in
     let bits0 = ref 0 in
     try
       Yojson.Safe.read_space p lb;
@@ -783,12 +792,45 @@ let read_review = (
             );
             bits0 := !bits0 lor 0x2;
           | 2 ->
-            field_comments := (
-              (
-                read__2
-              ) p lb
-            );
-            bits0 := !bits0 lor 0x4;
+            if not (Yojson.Safe.read_null_if_possible p lb) then (
+              field_comments := (
+                Some (
+                  (
+                    fun p lb ->
+                      Yojson.Safe.read_space p lb;
+                      let std_tuple = Yojson.Safe.start_any_tuple p lb in
+                      let len = ref 0 in
+                      let end_of_tuple = ref false in
+                      (try
+                        let x0 =
+                          let x =
+                            (
+                              read__1
+                            ) p lb
+                          in
+                          incr len;
+                          (try
+                            Yojson.Safe.read_space p lb;
+                            Yojson.Safe.read_tuple_sep2 p std_tuple lb;
+                          with Yojson.End_of_tuple -> end_of_tuple := true);
+                          x
+                        in
+                        if not !end_of_tuple then (
+                          try
+                            while true do
+                              Yojson.Safe.skip_json p lb;
+                              Yojson.Safe.read_space p lb;
+                              Yojson.Safe.read_tuple_sep2 p std_tuple lb;
+                            done
+                          with Yojson.End_of_tuple -> ()
+                        );
+                        (x0)
+                      with Yojson.End_of_tuple ->
+                        Ag_oj_run.missing_tuple_fields p !len [ 0 ]);
+                  ) p lb
+                )
+              );
+            )
           | _ -> (
               Yojson.Safe.skip_json p lb
             )
@@ -849,12 +891,45 @@ let read_review = (
               );
               bits0 := !bits0 lor 0x2;
             | 2 ->
-              field_comments := (
-                (
-                  read__2
-                ) p lb
-              );
-              bits0 := !bits0 lor 0x4;
+              if not (Yojson.Safe.read_null_if_possible p lb) then (
+                field_comments := (
+                  Some (
+                    (
+                      fun p lb ->
+                        Yojson.Safe.read_space p lb;
+                        let std_tuple = Yojson.Safe.start_any_tuple p lb in
+                        let len = ref 0 in
+                        let end_of_tuple = ref false in
+                        (try
+                          let x0 =
+                            let x =
+                              (
+                                read__1
+                              ) p lb
+                            in
+                            incr len;
+                            (try
+                              Yojson.Safe.read_space p lb;
+                              Yojson.Safe.read_tuple_sep2 p std_tuple lb;
+                            with Yojson.End_of_tuple -> end_of_tuple := true);
+                            x
+                          in
+                          if not !end_of_tuple then (
+                            try
+                              while true do
+                                Yojson.Safe.skip_json p lb;
+                                Yojson.Safe.read_space p lb;
+                                Yojson.Safe.read_tuple_sep2 p std_tuple lb;
+                              done
+                            with Yojson.End_of_tuple -> ()
+                          );
+                          (x0)
+                        with Yojson.End_of_tuple ->
+                          Ag_oj_run.missing_tuple_fields p !len [ 0 ]);
+                    ) p lb
+                  )
+                );
+              )
             | _ -> (
                 Yojson.Safe.skip_json p lb
               )
@@ -862,7 +937,7 @@ let read_review = (
       done;
       assert false;
     with Yojson.End_of_object -> (
-        if !bits0 <> 0x7 then Ag_oj_run.missing_fields p [| !bits0 |] [| "body"; "event"; "comments" |];
+        if !bits0 <> 0x3 then Ag_oj_run.missing_fields p [| !bits0 |] [| "body"; "event" |];
         (
           {
             body = !field_body;

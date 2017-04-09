@@ -17,6 +17,7 @@ let execute_task_if ~name ~vars ~f =
     | None -> failed "task is empty"
 
 let () =
-  match Env_var.requires ["TASK"; "GITHUB_TOKEN"] with
+  let vars = ["TASK"; "GITHUB_TOKEN"; "GITHUB_USER"; "GITHUB_REPO"] in
+  match Env_var.requires vars with
     | Ok vars -> execute_task_if ~name:(Env_var.get "TASK" vars) ~vars ~f:execute_task
     | Error e -> failed e

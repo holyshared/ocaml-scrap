@@ -12,11 +12,12 @@ let init ~token ~user ~repo =
   { user; repo; token }
 
 (** Authorization: token OAUTH-TOKEN *)
-let headers_of_api token =
+let headers_of_api t =
   let h = Header.init () in
   Header.add_list h [
-    ("User-Agent", "holyshared");
-    ("Authorization", ("token " ^ token))
+    ("User-Agent", t.user);
+    ("Authorization", ("token " ^ t.token));
+    ("Accept", "application/vnd.github.black-cat-preview+json")
   ]
 
 let status_code_of_response res =
@@ -27,7 +28,7 @@ let body_of_response body =
 
 (** POST /repos/:owner/:repo/pulls/:number/comments *)
 let create_commit_comment t ~num ~content =
-  let headers = headers_of_api t.token in
+  let headers = headers_of_api t in
   let body = Github_j.string_of_review_comment content in
   let uri = "https://api.github.com/repos/" ^ t.user ^ "/" ^ t.repo ^ "/pulls/" ^ (string_of_int num) ^ "/comments" in
   print_endline uri;
@@ -37,7 +38,7 @@ let create_commit_comment t ~num ~content =
   body_of_response body
 
 let create_review t ~num ~content =
-  let headers = headers_of_api t.token in
+  let headers = headers_of_api t in
   let body = Github_j.string_of_review content in
   let uri = "https://api.github.com/repos/" ^ t.user ^ "/" ^ t.repo ^ "/pulls/" ^ (string_of_int num) ^ "/reviews" in
   print_endline uri;
