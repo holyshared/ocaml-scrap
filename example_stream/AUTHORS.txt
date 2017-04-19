@@ -1,0 +1,8 @@
+(* OASIS_START *)
+(* DO NOT EDIT (digest: 4a50197ab8449657b96013d22d44f6bc) *)
+
+Authors of example_stream:
+
+* Noritaka Horio <holy.shared.design@gmail.com>
+
+(* OASIS_STOP *)
