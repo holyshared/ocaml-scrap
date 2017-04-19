@@ -1,30 +1,47 @@
+type 'a stream_result =
+  | Eof of 'a option
+  | Consumed of 'a
+
 let char_stream_of_file file =
   try
     Ok (Stream.of_channel (open_in file))
   with Sys_error e -> Error e
 
-let append_if_crlf c ~out =
-  if c = '\n' then
-    c::out
+module CharStream = struct
+  let next t =
+    try
+      Consumed (Stream.next t)
+    with
+      Stream.Failure -> Eof None
+end
+
+let stop_if_crlf v ~out ~stop ~continue =
+  if v = '\n' then
+    stop out
   else
-    out
+    continue v
 
 module LineStream = struct
-  let next_line t =
-    let rec line t ~out =
-      try
-        line t ~out:(append_if_crlf (Stream.next t) ~out)
-      with Stream.Failure -> out in
-    line t ~out:[]
-
   let next t =
-    next_line t
+    let to_consumed out = Consumed out in
+    let rec next_line t ~out =
+      let add_to_list v = next_line t ~out:(v::out) in
+      match CharStream.next t with
+        | Eof _ -> Eof (Some (out))
+        | Consumed v ->
+          stop_if_crlf v ~out ~stop:to_consumed ~continue:add_to_list in
+    next_line t []
 end
 
 let print_lines t =
   let rec print_out t =
-    List.iter (fun c -> print_char c) (LineStream.next t);
-    print_out t in
+    let print_line v = List.iter (fun c -> print_char c) v in
+    let end_stream v = match v with
+      | Some v -> print_line v
+      | None -> () in
+    match LineStream.next t with
+      | Eof v -> end_stream v
+      | Consumed v -> print_line v; print_out t in
   print_out t
 
 let () =
