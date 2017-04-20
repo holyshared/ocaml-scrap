@@ -15,6 +15,15 @@ end
 module Make(S: S) = struct
   type t = S.t
   let next s = S.next s
+  let iter s ~f =
+    let rec iter s ~f =
+      match next s with
+        | Consumed v -> f v; iter s ~f
+        | Eof v ->
+          match v with
+            | Some v -> f v
+            | None -> () in
+    iter s ~f
 end
 
 module CharStream = Make(struct
@@ -47,14 +56,7 @@ module LineStream = Make(struct
 end)
 
 let print_lines t =
-  let rec print_out t =
-    let end_stream v = match v with
-      | Some v -> print_endline v
-      | None -> () in
-    match LineStream.next t with
-      | Eof v -> end_stream v
-      | Consumed v -> print_endline v; print_out t in
-  print_out t
+  LineStream.iter t ~f:(fun v -> print_endline v)
 
 let () =
   let input_stream file = char_stream_of_file file in
