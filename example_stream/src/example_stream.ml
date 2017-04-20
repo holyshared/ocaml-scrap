@@ -22,6 +22,19 @@ let stop_if_crlf v ~out ~stop ~continue =
     continue v
 
 module LineStream = struct
+  let next_s t =
+    let rec next_line t ~buf =
+      let add_char_to v ~buf = Buffer.add_char buf v; next_line t ~buf in
+
+      match CharStream.next t with
+        | Eof _ -> Eof (Some (Buffer.contents buf))
+        | Consumed v ->
+          if v = '\n' then
+            Consumed (Buffer.contents buf)
+          else
+            add_char_to v ~buf in
+    next_line t ~buf:(Buffer.create 1024)
+
   let next t =
     let to_consumed out = Consumed out in
     let rec next_line t ~out =
