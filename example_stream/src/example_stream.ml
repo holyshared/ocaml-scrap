@@ -7,21 +7,32 @@ let char_stream_of_file file =
     Ok (Stream.of_channel (open_in file))
   with Sys_error e -> Error e
 
-module CharStream = struct
+module type S = sig
+  type t
+  val next: char Stream.t -> t stream_result
+end
+
+module Make(S: S) = struct
+  type t = S.t
+  let next s = S.next s
+end
+
+module CharStream = Make(struct
+  type t = char
   let next t =
     try
       Consumed (Stream.next t)
     with
       Stream.Failure -> Eof None
-end
+end)
 
-let stop_if_crlf v ~out ~stop ~continue =
-  if v = '\n' then
-    stop out
-  else
-    continue v
-
-module LineStream = struct
+module LineStream = Make(struct
+  type t = string
+  let stop_if_crlf v ~out ~stop ~continue =
+    if v = '\n' then
+      stop out
+    else
+      continue v
   let next t =
     let to_consumed buf = Consumed (Buffer.contents buf) in
     let rec next_line t ~buf =
@@ -33,7 +44,7 @@ module LineStream = struct
         | Consumed v ->
           stop_if_crlf v ~out:buf ~stop:to_consumed ~continue:add_char_to_buffer in
     next_line t ~buf:(Buffer.create 1024)
-end
+end)
 
 let print_lines t =
   let rec print_out t =
