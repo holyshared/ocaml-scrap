@@ -23,4 +23,18 @@ module Make(S: S) = struct
             | Some v -> f v
             | None -> () in
     iter s ~f
+  let take s ~n =
+    let rec take_n ~n ~out =
+      let add_last_item v ~out =
+        match v with
+          | None -> []
+          | Some v -> v::out in
+      let add_item ~n ~out = match next s with
+        | Eof v -> add_last_item v ~out
+        | Consumed v -> take_n ~n:(n - 1) ~out:(v::out) in
+      if n <= 0 then
+        List.rev out
+      else
+        add_item ~n ~out in
+    take_n ~n ~out:[]
 end
