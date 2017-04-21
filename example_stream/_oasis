@@ -7,8 +7,12 @@ License:     MIT
 Plugins:     META (0.4), StdFiles (0.4), DevFiles (0.4)
 BuildTools: ocamlbuild
 
+Library core_stream
+  Path: src
+  Modules: Core_stream, Char_stream, Line_stream
+
 Executable example_stream
   Path: src
   MainIs: example_stream.ml
   CompiledObject: native
-
+  BuildDepends: core_stream

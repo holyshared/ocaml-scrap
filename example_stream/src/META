@@ -1,0 +1,11 @@
+# OASIS_START
+# DO NOT EDIT (digest: e1dcb866805799cd80af09d656ede582)
+version = "0.1.o"
+description = "ok"
+archive(byte) = "core_stream.cma"
+archive(byte, plugin) = "core_stream.cma"
+archive(native) = "core_stream.cmxa"
+archive(native, plugin) = "core_stream.cmxs"
+exists_if = "core_stream.cma"
+# OASIS_STOP
+

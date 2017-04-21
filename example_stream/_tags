@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: ce1a5ed8b7aa7ce4af595a73078436c2)
+# DO NOT EDIT (digest: 304545f2d5616e2efcde3886d2300d98)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -14,5 +14,9 @@ true: annot, bin_annot
 ".git": not_hygienic
 "_darcs": -traverse
 "_darcs": not_hygienic
+# Library core_stream
+"src/core_stream.cmxs": use_core_stream
 # Executable example_stream
+"src/example_stream.native": use_core_stream
+<src/*.ml{,i,y}>: use_core_stream
 # OASIS_STOP
