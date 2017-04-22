@@ -9,6 +9,4 @@ let () =
 
   match input_stream "fixtures/input.txt" with
     | Error e -> print_endline e
-    | Ok s ->
-      let p s = print_endline s in
-    List.iter p (Line_stream.take s ~n:2);
+    | Ok s -> Line_stream.iter_n s ~n:2 ~f:(fun ss -> List.iter (fun s -> print_endline s) ss)

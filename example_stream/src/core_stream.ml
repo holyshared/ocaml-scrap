@@ -22,12 +22,23 @@ module Make(S: S) = struct
     iter s ~f
   let take s ~n =
     let rec take_n ~n ~out =
+      let eof ~out =
+        match out with
+          | [] -> Eof
+          | _ -> Consumed (List.rev out) in
       let add_item ~n ~out = match next s with
-        | Eof -> out
+        | Eof -> eof ~out
         | Consumed v -> take_n ~n:(n - 1) ~out:(v::out) in
       if n <= 0 then
-        List.rev out
+        Consumed (List.rev out)
       else
         add_item ~n ~out in
     take_n ~n ~out:[]
+
+  let iter_n s ~f ~n =
+    let rec iter_n s ~f ~n =
+      match take s ~n with
+        | Eof -> ()
+        | Consumed v -> f v; iter_n s ~f ~n in
+    iter_n s ~f ~n
 end
