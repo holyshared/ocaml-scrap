@@ -6,7 +6,7 @@ module Char_stream = Make(struct
     try
       Consumed (Stream.next t)
     with
-      Stream.Failure -> Eof None
+      Stream.Failure -> Eof
 end)
 
 include Char_stream

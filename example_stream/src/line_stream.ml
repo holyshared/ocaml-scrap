@@ -10,7 +10,7 @@ module Line_stream = Make(struct
   let next t =
     let to_consumed buf = Consumed (Buffer.contents buf) in
     let eof buf = if (Buffer.length buf) <= 0 then
-        Eof None
+        Eof
       else
         Consumed (Buffer.contents buf) in
     let rec next_line t ~buf =
@@ -18,7 +18,7 @@ module Line_stream = Make(struct
         Buffer.add_char buf v;
         next_line t ~buf in
       match Char_stream.next t with
-        | Eof _ -> eof buf
+        | Eof -> eof buf
         | Consumed v ->
           stop_if_crlf v ~out:buf ~stop:to_consumed ~continue:add_char_to_buffer in
     next_line t ~buf:(Buffer.create 1024)

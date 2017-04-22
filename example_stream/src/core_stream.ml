@@ -1,5 +1,5 @@
 type 'a stream_result =
-  | Eof of 'a option
+  | Eof
   | Consumed of 'a
 
 module type S = sig
@@ -18,19 +18,12 @@ module Make(S: S) = struct
     let rec iter s ~f =
       match next s with
         | Consumed v -> f v; iter s ~f
-        | Eof v ->
-          match v with
-            | Some v -> f v
-            | None -> () in
+        | Eof -> () in
     iter s ~f
   let take s ~n =
     let rec take_n ~n ~out =
-      let add_last_item v ~out =
-        match v with
-          | None -> []
-          | Some v -> v::out in
       let add_item ~n ~out = match next s with
-        | Eof v -> add_last_item v ~out
+        | Eof -> out
         | Consumed v -> take_n ~n:(n - 1) ~out:(v::out) in
       if n <= 0 then
         List.rev out
