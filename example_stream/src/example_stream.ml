@@ -1,12 +1,9 @@
-let print_lines t =
-  Line_stream.iter t ~f:(fun v -> print_endline v)
-
 let line_stream_of file = Line_stream.of_file file
 
 let print_all_lines o =
   match o with
     | Error e -> print_endline e
-    | Ok s -> print_lines s
+    | Ok s -> Line_stream.iter s ~f:(fun v -> print_endline v)
 
 let print_iter_n o ~n =
   match o with
