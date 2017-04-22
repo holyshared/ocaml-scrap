@@ -20,6 +20,14 @@ module Make(S: S) = struct
         | Consumed v -> f v; iter s ~f
         | Eof -> () in
     iter s ~f
+
+  let iteri s ~f =
+    let rec iteri s ~f ~i =
+      match next s with
+        | Consumed v -> f i v; iteri s ~f ~i:(i + 1)
+        | Eof -> () in
+    iteri s ~f ~i:1
+
   let take s ~n =
     let rec take_n ~n ~out =
       let eof ~out =
