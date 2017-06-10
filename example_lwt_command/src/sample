@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "ok stdout" >&1
+
+echo "ok stderr" >&2
+echo "ok stderr" >&2
+echo "ok stderr" >&2
+
+exit 0

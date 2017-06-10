@@ -1,0 +1,4 @@
+PKG lwt
+PKG unix
+S src/*
+B _build/*

@@ -1,0 +1,8 @@
+(* OASIS_START *)
+(* DO NOT EDIT (digest: f145d5dcfd219bc0dae730ade4c9221d) *)
+
+Authors of example_lwt_command:
+
+* Noritaka Horio <holy.shared.design@gmail.com>
+
+(* OASIS_STOP *)
