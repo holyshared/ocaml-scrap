@@ -1,5 +1,5 @@
 (* OASIS_START *)
-(* DO NOT EDIT (digest: f613a3e6deef3265145c78fed237d93e) *)
+(* DO NOT EDIT (digest: 47116f6d535356eb87bd5bd3ae8ac613) *)
 
 This is the INSTALL file for the example_lwt_command distribution.
 
@@ -13,7 +13,8 @@ In order to compile this package, you will need:
 
 * ocaml
 * findlib
-* lwt for executable example_lwt_command
+* lwt for executable example_lwt_command_basic,
+  executable example_lwt_command_stream
 
 Installing
 ==========

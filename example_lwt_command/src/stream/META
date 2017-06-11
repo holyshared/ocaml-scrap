@@ -1,0 +1,11 @@
+# OASIS_START
+# DO NOT EDIT (digest: e04fd0e2a2f3b81a7b42a584a5a5f3b5)
+version = "0.1.0"
+description = "example_lwt_command"
+archive(byte) = "lwt_command_stream.cma"
+archive(byte, plugin) = "lwt_command_stream.cma"
+archive(native) = "lwt_command_stream.cmxa"
+archive(native, plugin) = "lwt_command_stream.cmxs"
+exists_if = "lwt_command_stream.cma"
+# OASIS_STOP
+

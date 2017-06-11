@@ -8,11 +8,21 @@ Plugins:     META (0.4), StdFiles (0.4), DevFiles (0.4)
 BuildTools: ocamlbuild
 
 Library lwt_command
-  Path: src
-  Modules: Command
+  Path: src/basic
+  Modules: Client
 
-Executable example_lwt_command
-  Path: src
-  MainIs: example_lwt_command.ml
+Library lwt_command_stream
+  Path: src/stream
+  Modules: Process
+
+Executable example_lwt_command_basic
+  Path: src/basic
+  MainIs: example_basic.ml
   CompiledObject: native
   BuildDepends: lwt.unix, lwt_command
+
+Executable example_lwt_command_stream
+  Path: src/stream
+  MainIs: example_stream.ml
+  CompiledObject: native
+  BuildDepends: lwt.unix, lwt_command_stream

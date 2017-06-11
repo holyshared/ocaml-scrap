@@ -1,0 +1,4 @@
+#!/bin/bash
+
+hh_client restart >&1
+hh_client check --json >&1

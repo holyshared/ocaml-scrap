@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: 9ac34605aeae70f9a6ceb00c5963c0ee)
+# DO NOT EDIT (digest: db6a390212eec39ba0febc4da53875c4)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -15,10 +15,17 @@ true: annot, bin_annot
 "_darcs": -traverse
 "_darcs": not_hygienic
 # Library lwt_command
-"src/lwt_command.cmxs": use_lwt_command
-# Executable example_lwt_command
-"src/example_lwt_command.native": pkg_lwt.unix
-"src/example_lwt_command.native": use_lwt_command
-<src/*.ml{,i,y}>: pkg_lwt.unix
-<src/*.ml{,i,y}>: use_lwt_command
+"src/basic/lwt_command.cmxs": use_lwt_command
+# Library lwt_command_stream
+"src/stream/lwt_command_stream.cmxs": use_lwt_command_stream
+# Executable example_lwt_command_basic
+"src/basic/example_basic.native": pkg_lwt.unix
+"src/basic/example_basic.native": use_lwt_command
+<src/basic/*.ml{,i,y}>: pkg_lwt.unix
+<src/basic/*.ml{,i,y}>: use_lwt_command
+# Executable example_lwt_command_stream
+"src/stream/example_stream.native": pkg_lwt.unix
+"src/stream/example_stream.native": use_lwt_command_stream
+<src/stream/*.ml{,i,y}>: pkg_lwt.unix
+<src/stream/*.ml{,i,y}>: use_lwt_command_stream
 # OASIS_STOP
