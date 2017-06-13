@@ -1,0 +1,11 @@
+# OASIS_START
+# DO NOT EDIT (digest: 829d4465b4dfcc2ca3bb6bcc6930ff7b)
+version = "0.1.o"
+description = "ok"
+archive(byte) = "tcp_header.cma"
+archive(byte, plugin) = "tcp_header.cma"
+archive(native) = "tcp_header.cmxa"
+archive(native, plugin) = "tcp_header.cmxs"
+exists_if = "tcp_header.cma"
+# OASIS_STOP
+

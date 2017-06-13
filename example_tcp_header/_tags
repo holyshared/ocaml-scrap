@@ -1,0 +1,22 @@
+# OASIS_START
+# DO NOT EDIT (digest: 16aafb459d602b02e2187cc6666ea464)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
+# useless stuff for the build process
+true: annot, bin_annot
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Library tcp_header
+"src/tcp_header.cmxs": use_tcp_header
+# Executable example_tcp_header
+"src/example_tcp_header.native": use_tcp_header
+<src/*.ml{,i,y}>: use_tcp_header
+# OASIS_STOP

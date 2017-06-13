@@ -1,7 +1,7 @@
 open Process
 open Lwt.Infix
 
-let restart_command = ("hh_client", [|"restart"; "--no-load"|])
+let restart_command = ("hh_client", [|"restart"|])
 let check_command = ("hh_client", [|"check"; "--json"|])
 
 let terminated v =
