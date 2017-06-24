@@ -4,6 +4,8 @@ let () =
   let header = parse "tests/fixtures/tcp_header.byte" in
   print_endline (string_of_int header.src_port);
   print_endline (string_of_int header.dest_port);
+  print_endline (string_of_int header.seq_number);
+  print_endline (string_of_int header.ack_number);
   print_endline (string_of_bool header.urgent);
   print_endline (string_of_bool header.ack);
   print_endline (string_of_bool header.push);

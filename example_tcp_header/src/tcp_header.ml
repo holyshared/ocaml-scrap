@@ -67,7 +67,17 @@ let getval b n =
     raise (Invalid_argument "getval")
   else
     let r = ref 0 in
-    for x = n- 1 downto 0 do
+    for x = n - 1 downto 0 do
+      r := !r lor ((if getbit b then 1 else 0) lsl x)
+    done;
+    !r
+
+let getval_32 b n =
+  if n <= 0 || n > 32 then
+    raise (Invalid_argument "getval")
+  else
+    let r = ref 0 in
+    for x = n - 1 downto 0 do
       r := !r lor ((if getbit b then 1 else 0) lsl x)
     done;
     !r
@@ -79,20 +89,35 @@ let input_bits_of_file f =
 
 let parse f =
   let input = input_bits_of_file f in
+  let src_port = getval input 16 in
+  let dest_port = getval input 16 in
+  let seq_number = getval_32 input 32 in
+  let ack_number = getval_32 input 32 in
+  let data_offset = getval input 4 in
+  let receive = getval input 6 in
+  let urgent = getbit input in
+  let ack = getbit input in
+  let push = getbit input in
+  let reset = getbit input in
+  let syn = getbit input in
+  let fin = getbit input in
+  let window_size = getval input 16 in
+  let checksum = getval input 16 in
+  let urgent_pointer = getval input 16 in
   {
-    src_port = getval input 16;
-    dest_port = getval input 16;
-    seq_number = getval input 31;
-    ack_number = getval input 31;
-    data_offset = getval input 4;
-    receive = getval input 6;
-    urgent = getbit input;
-    ack = getbit input;
-    push = getbit input;
-    reset = getbit input;
-    syn = getbit input;
-    fin = getbit input;
-    window_size = getval input 16;
-    checksum = getval input 16;
-    urgent_pointer = getval input 16;
+    src_port;
+    dest_port;
+    seq_number;
+    ack_number;
+    data_offset;
+    receive;
+    urgent;
+    ack;
+    push;
+    reset;
+    syn;
+    fin;
+    window_size;
+    checksum;
+    urgent_pointer;
   }
