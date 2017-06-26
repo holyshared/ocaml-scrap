@@ -11,18 +11,15 @@ let msg =
   Arg.(value & pos 0 string "Revolt!" & info [] ~env ~docv:"MSG" ~doc)
 
 let chorus count msg =
-  for i = 1 to count do print_endline msg done
+  for i = 1 to count do print_endline msg done;
+  `Ok ()
 
-let chorus_t = Term.(const chorus $ count $ msg)
+let chorus_t = Term.(ret Term.(const chorus $ count $ msg))
 
 let info =
   let doc = "document message" in
   let man = [ `S "BUGS"; `P "Email bug reports to <hehey at example.org>."; ] in
-  Term.info "program_example" ~version:"1.0.0" ~doc ~man
-
-let program_terminate = function
-  | `Error _ -> exit 1
-  | _ -> exit 0
+  Term.info "program_example" ~version:"1.0.0" ~exits:Term.default_exits ~doc ~man
 
 let () =
-  program_terminate (Term.eval (chorus_t, info))
+  Term.exit @@ (Term.eval (chorus_t, info))
