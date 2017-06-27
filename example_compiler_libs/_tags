@@ -1,0 +1,35 @@
+# OASIS_START
+# DO NOT EDIT (digest: fca1c3c38990f5bc0ae5ef3cccdb7ca7)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
+# useless stuff for the build process
+true: annot, bin_annot
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Library log
+"src/log/log.cmxs": use_log
+<src/log/*.ml{,i,y}>: pkg_compiler-libs.common
+<src/log/*.ml{,i,y}>: pkg_unix
+# Library task
+"src/task/task.cmxs": use_task
+<src/task/*.ml{,i,y}>: pkg_compiler-libs.common
+<src/task/*.ml{,i,y}>: pkg_unix
+<src/task/*.ml{,i,y}>: use_log
+# Executable example_compiler_libs
+"src/example_main.native": pkg_compiler-libs.common
+"src/example_main.native": pkg_unix
+"src/example_main.native": use_log
+"src/example_main.native": use_task
+<src/*.ml{,i,y}>: pkg_compiler-libs.common
+<src/*.ml{,i,y}>: pkg_unix
+<src/*.ml{,i,y}>: use_log
+<src/*.ml{,i,y}>: use_task
+# OASIS_STOP

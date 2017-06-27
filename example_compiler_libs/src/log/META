@@ -1,0 +1,12 @@
+# OASIS_START
+# DO NOT EDIT (digest: d4a7c9670b54a557d13eeca03678c118)
+version = "0.1.0"
+description = "example_compiler_libs"
+requires = "compiler-libs.common unix"
+archive(byte) = "log.cma"
+archive(byte, plugin) = "log.cma"
+archive(native) = "log.cmxa"
+archive(native, plugin) = "log.cmxs"
+exists_if = "log.cmxa"
+# OASIS_STOP
+
