@@ -19,8 +19,14 @@ Library task
   CompiledObject: native
   BuildDepends: log
 
+Library cli
+  Path:       src/cli
+  Modules: App, Cli_usage, Cli, Command, Sub_command1
+  CompiledObject: native
+  BuildDepends: log, task
+
 Executable example_compiler_libs
   Path:       src
   MainIs:     example_main.ml
   CompiledObject: native
-  BuildDepends: log, task
+  BuildDepends: log, task, cli

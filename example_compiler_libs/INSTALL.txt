@@ -1,5 +1,5 @@
 (* OASIS_START *)
-(* DO NOT EDIT (digest: 53a9874e739398f9f00ce5dc55f74c0b) *)
+(* DO NOT EDIT (digest: 119d5a6b05f32f456494ff4d1f7c05ee) *)
 
 This is the INSTALL file for the example_compiler_libs distribution.
 
@@ -13,7 +13,7 @@ In order to compile this package, you will need:
 
 * ocaml
 * findlib
-* ocaml-compiler-libs for library misc
+* compiler-libs for library log
 
 Installing
 ==========

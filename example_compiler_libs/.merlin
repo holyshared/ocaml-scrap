@@ -1,3 +1,8 @@
 PKG compiler-libs.common
 B _build/src
-B _build/src/misc
+B _build/src/log
+B _build/src/cli
+B _build/src/task
+S src/log
+S src/task
+S src/cli
