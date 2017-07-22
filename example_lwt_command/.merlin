@@ -1,4 +1,8 @@
 PKG lwt
 PKG unix
 S src/*
+S src/basic/*
+S src/stream/*
 B _build/*
+B _build/basic/*
+B _build/stream/*
