@@ -1,0 +1,7 @@
+(jbuild_version 1)
+
+(executables(
+  (names (example_main))
+  (public_names (example_main))
+  (libraries (example))
+))
