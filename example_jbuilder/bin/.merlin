@@ -1,0 +1,4 @@
+B ../_build/default/bin
+B ../_build/default/example
+FLG -w -40
+S ../example
