@@ -1,4 +1,6 @@
 B ../_build/default/bin
-B ../_build/default/example
+B ../_build/default/src/example
+B ../_build/default/src/example_dep
 FLG -w -40
-S ../example
+S ../src/example
+S ../src/example_dep

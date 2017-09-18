@@ -1,0 +1,5 @@
+(jbuild_version 1)
+
+(library
+  ((public_name example.dep)
+    (name example_dep)))
