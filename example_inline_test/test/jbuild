@@ -1,0 +1,23 @@
+(library (
+  (name example_all)
+  (libraries (example example_dep))
+  (library_flags -linkall)
+  (preprocess (pps (ppx_jane ppx_driver.runner)))
+))
+
+(executable (
+  (name test_runner)
+  (libraries (ppx_inline_test.runner.lib example_all))
+))
+
+(alias
+  ((name runtest)
+  (deps (test_runner.exe))
+  (action (run ${<} inline-test-runner example -diff-cmd "diff -u --label actual --label expected"))))
+
+(alias
+  ((name runtest)
+  (deps (test_runner.exe))
+  (action (run ${<} inline-test-runner example_dep -diff-cmd "diff -u --label actual --label expected"))))
+
+(jbuild_version 1)
