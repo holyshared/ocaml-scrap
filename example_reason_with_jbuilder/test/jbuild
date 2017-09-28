@@ -1,0 +1,10 @@
+(executable (
+  (name test)
+  (libraries (example ounit))
+))
+(jbuild_version 1)
+
+(alias
+  ((name runtest)
+  (deps (test.exe))
+  (action (run ${<}))))

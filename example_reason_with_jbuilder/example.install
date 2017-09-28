@@ -1,0 +1,12 @@
+lib: [
+  "_build/install/default/lib/example/META" {"META"}
+  "_build/install/default/lib/example/opam" {"opam"}
+  "_build/install/default/lib/example/example.cmi"
+  "_build/install/default/lib/example/example.cmx"
+  "_build/install/default/lib/example/example.cmt"
+  "_build/install/default/lib/example/example.re"
+  "_build/install/default/lib/example/example.cma"
+  "_build/install/default/lib/example/example.cmxa"
+  "_build/install/default/lib/example/example.a"
+  "_build/install/default/lib/example/example.cmxs"
+]
