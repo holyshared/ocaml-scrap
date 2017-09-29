@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: 803b07f94704b0412b58736355ee9d61)
+# DO NOT EDIT (digest: 5d3e06a61d43109980d843d1d70a8129)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -29,6 +29,8 @@ true: annot, bin_annot
 <src/cli/*.ml{,i,y}>: pkg_unix
 <src/cli/*.ml{,i,y}>: use_log
 <src/cli/*.ml{,i,y}>: use_task
+# Library cli_app
+"src/cli_app/cli_app.cmxs": use_cli_app
 # Executable example_compiler_libs
 "src/example_main.native": pkg_compiler-libs.common
 "src/example_main.native": pkg_unix

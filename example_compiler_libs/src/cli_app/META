@@ -1,0 +1,11 @@
+# OASIS_START
+# DO NOT EDIT (digest: 6b5d9e34f15cc85177617863ef99f71a)
+version = "0.1.0"
+description = "example_compiler_libs"
+archive(byte) = "cli_app.cma"
+archive(byte, plugin) = "cli_app.cma"
+archive(native) = "cli_app.cmxa"
+archive(native, plugin) = "cli_app.cmxs"
+exists_if = "cli_app.cmxa"
+# OASIS_STOP
+

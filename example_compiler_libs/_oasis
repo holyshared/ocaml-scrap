@@ -25,6 +25,11 @@ Library cli
   CompiledObject: native
   BuildDepends: log, task
 
+Library cli_app
+  Path:       src/cli_app
+  Modules: Global_options, Cli_app, Command, A_command, B_command
+  CompiledObject: native
+
 Executable example_compiler_libs
   Path:       src
   MainIs:     example_main.ml
