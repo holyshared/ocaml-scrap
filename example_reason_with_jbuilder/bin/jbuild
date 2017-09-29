@@ -1,0 +1,5 @@
+(executable (
+  (name main)
+  (libraries (example))
+))
+(jbuild_version 1)
