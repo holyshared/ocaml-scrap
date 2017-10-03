@@ -1,0 +1,9 @@
+LIB = libexample
+
+FILES[] =
+  example
+
+USE_OCAMLFIND = true
+
+.DEFAULT: $(OCamlLibrary $(LIB), $(FILES))
+

@@ -1,0 +1,1 @@
+val say: unit -> string
