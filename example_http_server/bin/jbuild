@@ -1,0 +1,7 @@
+(jbuild_version 1)
+
+(executable (
+  (name http_server)
+  (public_name http_server)
+  (libraries (ssl lwt_ssl conduit-lwt-unix cohttp-lwt-unix))
+))
