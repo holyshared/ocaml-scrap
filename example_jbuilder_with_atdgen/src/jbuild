@@ -3,7 +3,7 @@
 (library (
   (public_name user)
   (name user)
-  (libraries (atdgen yojson))
+  (libraries (atdgen))
 ))
 
 (rule (
