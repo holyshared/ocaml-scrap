@@ -1,0 +1,19 @@
+(jbuild_version 1)
+
+(library (
+  (public_name user)
+  (name user)
+  (libraries (atdgen yojson))
+))
+
+(rule (
+  (targets (user_j.ml user_j.mli))
+  (deps (user.atd))
+  (action (run ${bin:atdgen} -j ${<}))
+))
+
+(rule (
+  (targets (user_t.ml user_t.mli))
+  (deps (user.atd))
+  (action (run ${bin:atdgen} -t ${<}))
+))
