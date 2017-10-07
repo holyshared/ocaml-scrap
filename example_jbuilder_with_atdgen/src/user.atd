@@ -1,4 +1,4 @@
 type user = {
   name: string;
-  password: string;
+  description: string;
 }
