@@ -1,0 +1,8 @@
+(jbuild_version 1)
+
+(library (
+  (public_name config)
+  (name config)
+  (libraries (sexplib sexp_pretty))
+  (preprocess (pps (ppx_type_conv ppx_sexp_conv ppx_driver.runner)))
+))

@@ -1,0 +1,7 @@
+(jbuild_version 1)
+
+(executable (
+  (public_name main)
+  (name main)
+  (libraries (sexplib config))
+))
