@@ -7,4 +7,7 @@ test:
 clean:
 	rm -rf _build
 
-.PHONY: default test clean
+run:
+	_build/default/bin/main.exe
+
+.PHONY: default test clean run
