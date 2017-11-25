@@ -1,0 +1,7 @@
+(executable (
+  (name ppx_record_feilds)
+  (public_name ppx_record_feilds)
+  (libraries (compiler-libs.common))
+))
+
+(jbuild_version 1)

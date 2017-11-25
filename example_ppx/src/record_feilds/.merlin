@@ -1,0 +1,4 @@
+B ../../_build/default/src/record_feilds
+FLG -w -40
+PKG compiler-libs
+PKG compiler-libs.common
