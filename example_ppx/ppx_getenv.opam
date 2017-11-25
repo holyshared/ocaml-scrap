@@ -1,0 +1,19 @@
+opam-version: "1.2"
+maintainer: "holy.shared.design@gmail.com"
+authors: ["Noritaka Horio"]
+
+homepage: "https://github.com/holyshared/ocaml-scrap"
+bug-reports: "https://github.com/holyshared/ocaml-scrap/issues"
+dev-repo: "https://github.com/holyshared/ocaml-scrap.git"
+
+build: [
+  ["jbuilder" "build" "-p" name "-j" jobs]
+]
+
+build-test: [
+  ["jbuilder" "runtest" "-p" name]
+]
+
+depends: [
+  "jbuilder" {build}
+]

@@ -1,0 +1,7 @@
+(executable (
+  (name ppx_getenv)
+  (public_name ppx_getenv)
+  (libraries (compiler-libs.common))
+))
+
+(jbuild_version 1)

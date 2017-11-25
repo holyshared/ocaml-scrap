@@ -1,0 +1,17 @@
+[
+  structure_item (foo.ml[1,0+0]..[1,0+24])
+    Pstr_value Nonrec
+    [
+      <def>
+        pattern (foo.ml[1,0+4]..[1,0+5])
+          Ppat_any
+        expression (foo.ml[1,0+8]..[1,0+24])
+          Pexp_extension "getenv"
+          [
+            structure_item (foo.ml[1,0+17]..[1,0+23])
+              Pstr_eval
+              expression (foo.ml[1,0+17]..[1,0+23])
+                Pexp_constant PConst_string("USER",None)
+          ]
+    ]
+]
