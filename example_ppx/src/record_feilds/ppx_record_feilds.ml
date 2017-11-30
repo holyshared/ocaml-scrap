@@ -31,24 +31,15 @@ open Asttypes
 open Parsetree
 open Longident
 
-
-let with_prefix label_declarations =
-  ListLabels.iteri ~f:(fun i label ->
-    let open Asttypes in
-    print_endline ((string_of_int i) ^ ": " ^ label.pld_name.txt)
-  ) label_declarations
-
-(*
-
-  label with {
-    pld_name = {
-      txt: ("a_" ^ label.pld_name.txt);
-      loc: label.pld_name.loc;
-    };
-  }
-
-*)
-
+let with_prefix ~prefix label_declarations =
+  let prefix_with = ListLabels.map ~f:(fun label ->
+    let pld_name = label.pld_name in
+    { label with
+        pld_name = {
+          pld_name with txt = (prefix ^ pld_name.txt)
+        } }
+  ) label_declarations in
+  Ptype_record prefix_with
 
 let type_record_feilds_mapper argv =
   {
@@ -56,8 +47,8 @@ let type_record_feilds_mapper argv =
       type_declaration = (fun mapper type_declaration ->
         match type_declaration with
           | { ptype_kind = Ptype_record label_declarations } ->
-            with_prefix label_declarations;
-            type_declaration
+            { type_declaration with
+              ptype_kind = (with_prefix ~prefix:"a_" label_declarations) }
           | x -> type_declaration
       )
   }
