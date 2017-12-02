@@ -15,3 +15,6 @@
           ]
     ]
 ]
+
+File "foo.ml", line 1, characters 10-16:
+Error: Uninterpreted extension 'getenv'.
