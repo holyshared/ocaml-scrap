@@ -1,8 +1,15 @@
 [
-  structure_item (bar.ml[1,0+0]..[3,27+1])
+  structure_item (bar.ml[1,0+0]..[4,43+19])
     Pstr_type Rec
     [
-      type_declaration "t" (bar.ml[1,0+5]..[1,0+6]) (bar.ml[1,0+0]..[3,27+1])
+      type_declaration "t" (bar.ml[1,0+5]..[1,0+6]) (bar.ml[1,0+0]..[4,43+19])
+        attribute "prefix"
+          [
+            structure_item (bar.ml[4,43+12]..[4,43+18])
+              Pstr_eval
+              expression (bar.ml[4,43+12]..[4,43+18])
+                Pexp_constant PConst_string("user",None)
+          ]
         ptype_params =
           []
         ptype_cstrs =
@@ -14,6 +21,11 @@
                 Immutable
                 "name" (bar.ml[2,11+2]..[2,11+6])                core_type (bar.ml[2,11+8]..[2,11+14])
                   Ptyp_constr "string" (bar.ml[2,11+8]..[2,11+14])
+                  []
+              (bar.ml[3,27+2]..[3,27+15])
+                Immutable
+                "desc" (bar.ml[3,27+2]..[3,27+6])                core_type (bar.ml[3,27+8]..[3,27+14])
+                  Ptyp_constr "string" (bar.ml[3,27+8]..[3,27+14])
                   []
             ]
         ptype_private = Public
