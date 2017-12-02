@@ -1,4 +1,4 @@
-B ../../_build/default/src/record_feilds
+B ../../../_build/default/bin/record_feilds/src
 FLG -w -40
 PKG compiler-libs
 PKG compiler-libs.common

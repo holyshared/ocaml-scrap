@@ -1,0 +1,3 @@
+B ../../../_build/default/bin/example/src
+FLG -ppx '/Users/holyshared/Documents/projects/ocaml-scrap/example_ppx/_build/default/.ppx/ppx_example+ppx_driver.runner/ppx.exe --as-ppx'
+FLG -w -40
