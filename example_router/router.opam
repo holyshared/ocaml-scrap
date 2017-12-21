@@ -1,0 +1,23 @@
+opam-version: "1.2"
+name: "router"
+version: "0.1.0"
+maintainer: "holy.shared.design@gmail.com"
+authors: ["Noritaka Horio"]
+license: "MIT"
+homepage: "git@github.com:holyshared/ocaml-scrap"
+bug-reports: "https://github.com/holyshared/ocaml-scrap/issues"
+dev-repo: "https://github.com/holyshared/ocaml-scrap.git"
+
+build: [
+  ["jbuilder" "build" "-p" name "-j" jobs]
+]
+
+build-test: [
+  ["jbuilder" "runtest" "-p" name]
+]
+
+depends: [
+  "jbuilder" {build}
+]
+
+available: [ ocaml-version >= "4.06.0" ]
