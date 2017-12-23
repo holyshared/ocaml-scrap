@@ -1,0 +1,3 @@
+B ../../_build/default/src/pattern
+FLG -open Pattern -w -40
+PKG str

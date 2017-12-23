@@ -1,4 +1,7 @@
 B ../_build/default/bin
+B ../_build/default/src/pattern
 B ../_build/default/src/router
 FLG -w -40
+PKG str
+S ../src/pattern
 S ../src/router
