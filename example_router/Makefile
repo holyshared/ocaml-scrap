@@ -4,4 +4,7 @@ build:
 clean:
 	jbuilder clean
 
-.PHONY: build clean
+test:
+	./_build/default/bin/main.exe
+
+.PHONY: build clean test

@@ -1,13 +1,17 @@
 module Method = struct
   type t = Get | Post | PUT | DELETE | HEAD
+  let get = Get
 end
 
 module Path = struct
   type t = string
+  let of_string s = s
 end
 
 module Handler = struct
   type t = unit -> unit
+  let on f = f
+  let call f = f ()
 end
 
 module Route = struct

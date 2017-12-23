@@ -1,0 +1,7 @@
+(executable (
+  (name main)
+  (public_name main)
+  (libraries (router))
+))
+
+(jbuild_version 1)

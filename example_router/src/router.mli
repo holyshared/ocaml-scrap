@@ -1,13 +1,17 @@
 module Method: sig
   type t
+  val get: t
 end
 
 module Path: sig
   type t
+  val of_string: string -> t
 end
 
 module Handler: sig
   type t
+  val on: (unit -> unit) -> t
+  val call: t -> unit
 end
 
 module Route: sig
