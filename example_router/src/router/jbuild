@@ -1,6 +1,6 @@
 (library (
   (name router)
-  (public_name router)
+  (public_name router.http)
 ))
 
 (jbuild_version 1)
