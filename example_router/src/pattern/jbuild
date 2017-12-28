@@ -1,7 +1,0 @@
-(library (
-  (name pattern)
-  (public_name router.pattern)
-  (libraries (str))
-))
-
-(jbuild_version 1)

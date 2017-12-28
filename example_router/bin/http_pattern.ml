@@ -1,8 +1,6 @@
-open Pattern
+open Router
 
 let p4 () =
-  let module Pattern = Uri_pattern.Pattern in
-  let module Pattern_builder = Uri_pattern.Pattern_builder in
   let uri_pattern = Pattern_builder.(pattern (root $ (const "users") $ (digits "id") $ (alphabet "kind"))) in
   let match_uri uri =
     match Pattern.resolve uri_pattern uri with

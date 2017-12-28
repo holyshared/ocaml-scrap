@@ -1,6 +1,11 @@
 module Method = struct
-  type t = Get | Post | PUT | DELETE | HEAD
+  type t = Get | Post | PATCH | PUT | DELETE | HEAD
   let get = Get
+  let post = Post
+  let put = PUT
+  let patch = PATCH
+  let delete = DELETE
+  let head = HEAD
 end
 
 module Path = struct

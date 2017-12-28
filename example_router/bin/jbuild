@@ -1,7 +1,7 @@
 (executables (
   (names (http_router http_pattern))
   (public_names (http_router http_pattern))
-  (libraries (router.http router.pattern))
+  (libraries (router))
 ))
 
 (jbuild_version 1)
