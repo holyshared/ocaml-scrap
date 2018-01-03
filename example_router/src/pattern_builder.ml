@@ -31,9 +31,9 @@ let pattern_of_groups patterns =
       Buffer.add_char line_buf '^';
       Buffer.add_buffer line_buf buf;
       Buffer.add_char line_buf '$';
-      buf in
+      line_buf in
     {
-      regexp= (Buffer.contents (wrap buf)) |> Str.regexp;
+      regexp= Buffer.contents (wrap buf) |> Str.regexp;
       labels= (List.rev labels);
     } in
 

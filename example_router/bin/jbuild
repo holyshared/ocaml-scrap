@@ -1,6 +1,6 @@
 (executables (
-  (names (http_router http_pattern))
-  (public_names (http_router http_pattern))
+  (names (http_router http_pattern http_resolver))
+  (public_names (http_router http_pattern http_resolver))
   (libraries (router))
 ))
 

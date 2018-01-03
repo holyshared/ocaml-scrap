@@ -6,6 +6,7 @@ module Method: sig
   val patch: t
   val delete: t
   val head: t
+  val to_string: t -> string
 end
 
 module Path: sig
