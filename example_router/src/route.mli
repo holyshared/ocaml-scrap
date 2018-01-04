@@ -7,4 +7,4 @@ val get: Pattern.t -> t
 val resolve: meth:Http.Method.t
   -> uri:string
   -> t
-  -> (string * string) list option
+  -> Route_params.t option

@@ -1,4 +1,4 @@
-type t = (string * string) list -> (unit, string) result
+type t = Route_params.t -> (unit, string) result
 
 let on f = f
 

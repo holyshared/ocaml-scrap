@@ -4,7 +4,7 @@ module type S = sig
   val resolve: meth:Http.Method.t
     -> uri:string
     -> t
-    -> ((string * string) list * Handler.t) option
+    -> (Route_params.t * Handler.t) option
 end
 
 module Linear_resolver : S = struct

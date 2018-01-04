@@ -8,6 +8,6 @@ let resolve ~meth ~uri t =
   let m, p = t in
   match Pattern.resolve p uri with
     | Some v ->
-      if (m = meth) then Some v
+      if (m = meth) then Some (Route_params.from v)
       else None
     | None -> None

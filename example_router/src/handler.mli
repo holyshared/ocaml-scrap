@@ -1,7 +1,7 @@
 type t
 
-val on: ((string * string) list -> (unit, string) result) -> t
+val on: (Route_params.t -> (unit, string) result) -> t
 
-val call: params:(string * string) list
+val call: params:Route_params.t
   -> t
   -> (unit, string) result
