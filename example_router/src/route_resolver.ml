@@ -7,7 +7,7 @@ module type S = sig
     -> ((string * string) list * Handler.t) option
 end
 
-module Default_route_resolver : S = struct
+module Linear_resolver : S = struct
   type t = Routes.t
 
   let create routes = routes

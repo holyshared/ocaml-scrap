@@ -6,7 +6,7 @@ module Routes = struct
   let user_update = Route.put (Pattern_builder.(pattern (root $ const "users" $ digits "id")))
 end
 
-module Linear_resolver = Route_resolver.Default_route_resolver
+module Linear_resolver = Route_resolver.Linear_resolver
 
 module Test_pattern = struct
   let patterns = [
@@ -31,7 +31,7 @@ module Test_pattern = struct
               end
             | Some (params, handler) ->
               begin
-                Handler.call ~params handler;
+                ignore (Handler.call ~params handler);
                 resolve tail
               end in
     resolve patterns
@@ -39,9 +39,9 @@ end
 
 let default_resolver () =
   let route_handlers = [
-    Route_handler.on Routes.user_index (fun s -> print_endline "user_index matched");
-    Route_handler.on Routes.user_show (fun s -> print_endline "user_show matched");
-    Route_handler.on Routes.user_update (fun s -> print_endline "user_update matched")
+    Route_handler.on Routes.user_index (fun s -> Ok (print_endline "user_index matched"));
+    Route_handler.on Routes.user_show (fun s -> Ok (print_endline "user_show matched"));
+    Route_handler.on Routes.user_update (fun s -> Ok (print_endline "user_update matched"))
   ] in
   let resolver = Linear_resolver.create route_handlers in
   Test_pattern.test resolver
