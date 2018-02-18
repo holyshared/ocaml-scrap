@@ -1,0 +1,7 @@
+(executables (
+  (names (http_pattern http_resolver http_routing))
+  (public_names (http_pattern http_resolver http_routing))
+  (libraries (router))
+))
+
+(jbuild_version 1)

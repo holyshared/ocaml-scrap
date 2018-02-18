@@ -1,0 +1,4 @@
+B ../_build/default/src
+FLG -open Router -w -40
+PKG str
+S .
