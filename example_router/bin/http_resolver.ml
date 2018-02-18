@@ -49,18 +49,19 @@ module Test_pattern = struct
               end
             | Some (params, handler) ->
               begin
-                ignore (Handler.call ~params handler);
+                ignore (handler params);
                 resolve tail
               end in
     resolve patterns
 end
 
 let default_resolver () =
-  let route_handlers = [
-    Route_handler.on Routes.user_index User_actions.index;
-    Route_handler.on Routes.user_show User_actions.show;
-    Route_handler.on Routes.user_update User_actions.update
-  ] in
+  let route_handlers =
+    Route.([
+      on Routes.user_index User_actions.index;
+      on Routes.user_show User_actions.show;
+      on Routes.user_update User_actions.update;
+    ]) in
   let resolver = Linear_resolver.create route_handlers in
   Test_pattern.test resolver
 
