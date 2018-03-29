@@ -6,6 +6,7 @@ open Longident
 
 let getenv s = try Sys.getenv s with Not_found -> ""
 
+(* [%getenv "USER"]を置き換える *)
 let pstr_mapper pstr ~loc =
   match pstr with
   | PStr [{ pstr_desc =
@@ -16,6 +17,7 @@ let pstr_mapper pstr ~loc =
     raise (Location.Error (
         Location.error ~loc "[%getenv] accepts a string, e.g. [%getenv \"USER\"]"))
 
+(* [%getenv "USER"]のフィルタリング *)
 let expr_mapper default_mapper mapper expr =
   match expr with
   | { pexp_desc =

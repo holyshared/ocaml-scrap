@@ -1,4 +1,5 @@
-B ../../../_build/default/bin/record_feilds/src
+B ../../../_build/default/bin/record_feilds/src/.ppx_record_feilds.eobjs
+B /Users/holyshared/.opam/4.06.1/lib/ocaml/compiler-libs
 FLG -w -40
-PKG compiler-libs
-PKG compiler-libs.common
+S .
+S /Users/holyshared/.opam/4.06.1/lib/ocaml/compiler-libs
