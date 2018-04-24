@@ -1,0 +1,6 @@
+(library (
+  (public_name prompt)
+  (name prompt)
+))
+
+(jbuild_version 1)
