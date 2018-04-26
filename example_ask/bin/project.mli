@@ -3,9 +3,9 @@
 open Prompt
 
 module Generator: sig
-  val run: string -> int -> unit
+  val run: string -> int -> int option -> unit
 end
 
 module Command: sig
-  val perform: (string -> int -> unit) -> unit
+  val perform: (string -> int -> int option -> unit) -> unit
 end
