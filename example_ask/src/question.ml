@@ -4,17 +4,6 @@ let ask msg =
   Printf.printf "%s\n" msg;
   read_line ()
 
-let ask_map msg ~f =
-  f (ask msg)
-
-let ask_int msg =
-  let rec try_ask_int msg =
-    try
-      int_of_string (ask msg)
-    with
-      | Failure s -> try_ask_int msg in
-  try_ask_int msg
-
 let ask_opt msg =
   let wrap_opt v =
     if (String.length v) <= 0 then None
@@ -26,6 +15,13 @@ let ask_require msg =
     match ask_opt msg with
       | Some v -> v
       | None -> try_ask msg in
+  try_ask msg
+
+let ask_int msg =
+  let rec try_ask msg =
+    try
+      int_of_string (ask_require msg)
+    with | Failure s -> try_ask msg in
   try_ask msg
 
 let ask_opt_int msg =
