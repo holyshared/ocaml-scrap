@@ -1,7 +1,7 @@
 (jbuild_version 1)
 
 (executables (
-  (names (main))
+  (names (main dom_content_loaded))
   (libraries (example))
   (preprocess (pps (js_of_ocaml-ppx)))
 ))
@@ -13,7 +13,14 @@
   )
 ))
 
+(rule (
+  (targets (dom_content_loaded.js))
+  (action
+    (run ${bin:js_of_ocaml} --source-map ${path:dom_content_loaded.bc} -o ${@} --pretty)
+  )
+))
+
 (alias (
   (name DEFAULT)
-  (deps (main.js index.html))
+  (deps (main.js dom_content_loaded.js dom_content_loaded.html index.html))
 ))
