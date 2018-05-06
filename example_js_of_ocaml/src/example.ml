@@ -30,6 +30,9 @@ let math =
         |> Array.map succ
         |> Js.array
 
+    method one =
+      Js.number_of_float 1.0
+
     val zero = 0.
   end)
 

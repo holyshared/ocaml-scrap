@@ -42,6 +42,7 @@ let dom_content_loaded evt =
   let example_math = Example.math in
   debug "debug: %s" "domContentLoaded!!";
   debug "debug: %f" (example_math##add 1.0 2.0);
+  debug "debug: %f" (example_math##one |> Js.float_of_number);
   let array_of_string_ul = array_of_string_to_dom (example_math##arrayOfString) in
   let array_of_number_ul = array_of_number_to_dom (example_math##arrayOfNumber) in
   Dom.appendChild document##.body array_of_string_ul;
