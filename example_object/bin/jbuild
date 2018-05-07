@@ -1,0 +1,11 @@
+(executable (
+  (name main)
+  (libraries (example))
+))
+
+(alias (
+  (name DEFAULT)
+  (deps (main.exe))
+))
+
+(jbuild_version 1)

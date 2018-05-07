@@ -1,0 +1,5 @@
+(alias (
+  (name DEFAULT)
+))
+
+(jbuild_version 1)

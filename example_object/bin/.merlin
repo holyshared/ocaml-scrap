@@ -1,0 +1,5 @@
+B ../_build/default/bin/.main.eobjs
+B ../_build/default/src/.example.objs
+FLG -w -40
+S .
+S ../src
