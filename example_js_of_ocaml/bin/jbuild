@@ -1,8 +1,8 @@
 (jbuild_version 1)
 
 (executables (
-  (names (main dom_content_loaded))
-  (libraries (example))
+  (names (main dom_content_loaded singleton_mod))
+  (libraries (example singleton))
   (preprocess (pps (js_of_ocaml-ppx)))
 ))
 
@@ -20,7 +20,14 @@
   )
 ))
 
+(rule (
+  (targets (singleton_mod.js))
+  (action
+    (run ${bin:js_of_ocaml} --source-map ${path:singleton_mod.bc} -o ${@} --pretty)
+  )
+))
+
 (alias (
   (name DEFAULT)
-  (deps (main.js dom_content_loaded.js dom_content_loaded.html index.html))
+  (deps (main.js dom_content_loaded.js singleton_mod.js singleton_mod.html dom_content_loaded.html index.html))
 ))

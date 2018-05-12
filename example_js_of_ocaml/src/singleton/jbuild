@@ -1,0 +1,7 @@
+(library (
+  (name singleton)
+  (libraries (js_of_ocaml))
+  (preprocess (pps (js_of_ocaml-ppx)))
+))
+
+(jbuild_version 1)
