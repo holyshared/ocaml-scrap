@@ -1,12 +1,12 @@
 B ../_build/default/bin/.main.eobjs
-B ../_build/default/src/.example.objs
+B ../_build/default/src/math/.example.objs
 B /Users/holyshared/.opam/4.06.1/lib/bytes
 B /Users/holyshared/.opam/4.06.1/lib/js_of_ocaml
 B /Users/holyshared/.opam/4.06.1/lib/uchar
 FLG -ppx '/Users/holyshared/Documents/projects/ocaml-scrap/example_js_of_ocaml/_build/default/.ppx/js_of_ocaml-ppx/ppx.exe --as-ppx'
 FLG -w -40
 S .
-S ../src
+S ../src/math
 S /Users/holyshared/.opam/4.06.1/lib/bytes
 S /Users/holyshared/.opam/4.06.1/lib/js_of_ocaml
 S /Users/holyshared/.opam/4.06.1/lib/uchar

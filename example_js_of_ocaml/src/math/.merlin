@@ -1,4 +1,4 @@
-B ../_build/default/src/.example.objs
+B ../../_build/default/src/math/.example.objs
 B /Users/holyshared/.opam/4.06.1/lib/bytes
 B /Users/holyshared/.opam/4.06.1/lib/js_of_ocaml
 B /Users/holyshared/.opam/4.06.1/lib/uchar
