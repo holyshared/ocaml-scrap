@@ -1,6 +1,6 @@
 open Js_of_ocaml
 
-let singleton = (object%js
+let num_op = (object%js
   method increment nums =
     let add_one n = (Js.float_of_number n) +. 1.0
       |> Js.number_of_float in
@@ -8,4 +8,4 @@ let singleton = (object%js
 end)
 
 let _ =
-  Js.export "singleton" singleton
+  Js.export "num_op" num_op

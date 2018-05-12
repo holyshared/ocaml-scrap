@@ -1,9 +1,10 @@
 (jbuild_version 1)
 
 (executables (
-  (names (main dom_content_loaded singleton_mod))
-  (libraries (example singleton))
+  (names (main dom_content_loaded num_op_entry))
+  (libraries (example num_op))
   (preprocess (pps (js_of_ocaml-ppx)))
+  (flags (-linkall))
 ))
 
 (rule (
@@ -21,13 +22,13 @@
 ))
 
 (rule (
-  (targets (singleton_mod.js))
+  (targets (num_op_entry.js))
   (action
-    (run ${bin:js_of_ocaml} --source-map ${path:singleton_mod.bc} -o ${@} --pretty)
+    (run ${bin:js_of_ocaml} --source-map ${path:num_op_entry.bc} -o ${@} --pretty)
   )
 ))
 
 (alias (
   (name DEFAULT)
-  (deps (main.js dom_content_loaded.js singleton_mod.js singleton_mod.html dom_content_loaded.html index.html))
+  (deps (main.js dom_content_loaded.js num_op_entry.js num_op_entry.html dom_content_loaded.html index.html))
 ))
