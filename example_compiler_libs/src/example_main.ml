@@ -1,0 +1,3 @@
+open App
+
+let () = run ()

@@ -1,0 +1,8 @@
+(* OASIS_START *)
+(* DO NOT EDIT (digest: 1e400fe53888d032855b3de21b868d35) *)
+
+Authors of example_compiler_libs:
+
+* Noritaka Horio <holy.shared.design@gmail.com>
+
+(* OASIS_STOP *)
