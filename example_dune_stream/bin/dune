@@ -1,0 +1,4 @@
+(executable
+ (public_name example_dune_stream)
+ (name main)
+ (libraries example_dune_stream camlp-streams))
